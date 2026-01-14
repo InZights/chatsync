@@ -1,0 +1,102 @@
+[
+  {
+    "type": "message",
+    "user": "U01ABC",
+    "text": "Weekly all-hands summary: \n*✓ Revenue on track* (+12% vs last quarter)\n*✓ New partnerships signed* (3 total)\n*→ Hiring plan* adjusted for 2026",
+    "ts": "1767861000.000000",
+    "team": "T001BRYD",
+    "replace_original": false,
+    "metadata": {
+      "event_type": "migration_source",
+      "event_payload": {
+        "teams_id": "MSG_009",
+        "teams_user_id": "T-USER-99",
+        "migration_timestamp": "2026-01-09T00:44:38.151700"
+      }
+    },
+    "files": [
+      {
+        "title": "Weekly_Summary_Jan_8_2026.pptx",
+        "url": "https://sharepoint.com/sites/leadership/Weekly_Summary_Jan_8_2026.pptx",
+        "teams_ref_id": "FILE_009"
+      }
+    ]
+  },
+  {
+    "type": "message",
+    "user": "U_UNKNOWN_5027dfb7",
+    "text": "Great numbers! The revenue growth is exactly what we projected. Should we accelerate the product roadmap timeline?",
+    "ts": "1767862822.000000",
+    "team": "T001BRYD",
+    "replace_original": false,
+    "metadata": {
+      "event_type": "migration_source",
+      "event_payload": {
+        "teams_id": "MSG_009_R1",
+        "teams_user_id": "T-USER-77",
+        "migration_timestamp": "2026-01-09T00:44:38.151756"
+      }
+    },
+    "thread_ts": "1767861000.000000",
+    "parent_user_id": "U01ABC"
+  },
+  {
+    "type": "message",
+    "user": "U01ABC",
+    "text": "Yes, let's look at parallel development tracks. Elena, can you identify which features we can accelerate without impacting quality?",
+    "ts": "1767864900.000000",
+    "team": "T001BRYD",
+    "replace_original": false,
+    "metadata": {
+      "event_type": "migration_source",
+      "event_payload": {
+        "teams_id": "MSG_009_R2",
+        "teams_user_id": "T-USER-99",
+        "migration_timestamp": "2026-01-09T00:44:38.151781"
+      }
+    },
+    "thread_ts": "1767861000.000000",
+    "parent_user_id": "U01ABC"
+  },
+  {
+    "type": "message",
+    "user": "U_UNKNOWN_08916548",
+    "text": "FYI: We're deprecating the _v1 REST API_ in June 2026. Migration guide is ready. All customers have been notified. Transition period: 6 months.",
+    "ts": "1767870000.000000",
+    "team": "T001BRYD",
+    "replace_original": false,
+    "metadata": {
+      "event_type": "migration_source",
+      "event_payload": {
+        "teams_id": "MSG_010",
+        "teams_user_id": "T-USER-11",
+        "migration_timestamp": "2026-01-09T00:44:38.151810"
+      }
+    },
+    "files": [
+      {
+        "title": "API_v1_Deprecation_Guide.pdf",
+        "url": "https://sharepoint.com/sites/product/API_v1_Deprecation_Guide.pdf",
+        "teams_ref_id": "FILE_010"
+      }
+    ]
+  },
+  {
+    "type": "message",
+    "user": "U_UNKNOWN_dba6775d",
+    "text": "Good timing. The v2 API adoption is already at 78%. This 6-month window should be sufficient for the remaining users to migrate.",
+    "ts": "1767871815.000000",
+    "team": "T001BRYD",
+    "replace_original": false,
+    "metadata": {
+      "event_type": "migration_source",
+      "event_payload": {
+        "teams_id": "MSG_010_R1",
+        "teams_user_id": "T-USER-22",
+        "migration_timestamp": "2026-01-09T00:44:38.151887"
+      }
+    },
+    "thread_ts": "1767870000.000000",
+    "parent_user_id": "U_UNKNOWN_08916548"
+  }
+]

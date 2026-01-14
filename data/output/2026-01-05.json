@@ -1,0 +1,186 @@
+[
+  {
+    "type": "message",
+    "user": "U01ABC",
+    "text": "Good morning team! 📊 Let's kick off the Q1 planning session. I've prepared the initial budget forecast for discussion.",
+    "ts": "1767604500.000000",
+    "team": "T001BRYD",
+    "replace_original": false,
+    "metadata": {
+      "event_type": "migration_source",
+      "event_payload": {
+        "teams_id": "MSG_001",
+        "teams_user_id": "T-USER-99",
+        "migration_timestamp": "2026-01-09T00:44:38.150868"
+      }
+    },
+    "files": [
+      {
+        "title": "Q1_Budget_Forecast_2026.xlsx",
+        "url": "https://sharepoint.com/sites/planning/Q1_Budget_Forecast_2026.xlsx",
+        "teams_ref_id": "FILE_001"
+      }
+    ]
+  },
+  {
+    "type": "message",
+    "user": "U02XYZ",
+    "text": "Thanks Sarah! I reviewed it. The engineering allocation looks good, but I'd like to discuss the *marketing budget* increase.",
+    "ts": "1767605535.000000",
+    "team": "T001BRYD",
+    "replace_original": false,
+    "metadata": {
+      "event_type": "migration_source",
+      "event_payload": {
+        "teams_id": "MSG_001_R1",
+        "teams_user_id": "T-USER-44",
+        "migration_timestamp": "2026-01-09T00:44:38.150946"
+      }
+    },
+    "thread_ts": "1767604500.000000",
+    "parent_user_id": "U01ABC"
+  },
+  {
+    "type": "message",
+    "user": "U_UNKNOWN_5027dfb7",
+    "text": "I agree with Dave. The 20% increase is justified given our new product launch timeline. Here's the detailed ROI analysis: \n*Expected revenue impact: +$2.3M*",
+    "ts": "1767607542.000000",
+    "team": "T001BRYD",
+    "replace_original": false,
+    "metadata": {
+      "event_type": "migration_source",
+      "event_payload": {
+        "teams_id": "MSG_001_R2",
+        "teams_user_id": "T-USER-77",
+        "migration_timestamp": "2026-01-09T00:44:38.150989"
+      }
+    },
+    "files": [
+      {
+        "title": "Marketing_ROI_Analysis.pdf",
+        "url": "https://sharepoint.com/sites/planning/Marketing_ROI_Analysis.pdf",
+        "teams_ref_id": "FILE_002"
+      }
+    ],
+    "thread_ts": "1767604500.000000",
+    "parent_user_id": "U01ABC"
+  },
+  {
+    "type": "message",
+    "user": "U02XYZ",
+    "text": "FYI team - the @Global Tech client contract is _under review_. Legal expects sign-off by EOW.",
+    "ts": "1767612030.000000",
+    "team": "T001BRYD",
+    "replace_original": false,
+    "metadata": {
+      "event_type": "migration_source",
+      "event_payload": {
+        "teams_id": "MSG_002",
+        "teams_user_id": "T-USER-44",
+        "migration_timestamp": "2026-01-09T00:44:38.151037"
+      }
+    }
+  },
+  {
+    "type": "message",
+    "user": "U_UNKNOWN_dba6775d",
+    "text": "Great! That's ahead of schedule. Should we start provisioning the infrastructure?",
+    "ts": "1767613500.000000",
+    "team": "T001BRYD",
+    "replace_original": false,
+    "metadata": {
+      "event_type": "migration_source",
+      "event_payload": {
+        "teams_id": "MSG_002_R1",
+        "teams_user_id": "T-USER-22",
+        "migration_timestamp": "2026-01-09T00:44:38.151070"
+      }
+    },
+    "thread_ts": "1767612030.000000",
+    "parent_user_id": "U02XYZ"
+  },
+  {
+    "type": "message",
+    "user": "U02XYZ",
+    "text": "Yes, good idea. Michael, can you coordinate with DevOps? I'll send you the technical requirements doc.",
+    "ts": "1767615322.000000",
+    "team": "T001BRYD",
+    "replace_original": false,
+    "metadata": {
+      "event_type": "migration_source",
+      "event_payload": {
+        "teams_id": "MSG_002_R2",
+        "teams_user_id": "T-USER-44",
+        "migration_timestamp": "2026-01-09T00:44:38.151098"
+      }
+    },
+    "files": [
+      {
+        "title": "GlobalTech_TechSpecs.docx",
+        "url": "https://sharepoint.com/sites/clients/GlobalTech_TechSpecs.docx",
+        "teams_ref_id": "FILE_003"
+      }
+    ],
+    "thread_ts": "1767612030.000000",
+    "parent_user_id": "U02XYZ"
+  },
+  {
+    "type": "message",
+    "user": "U_UNKNOWN_5027dfb7",
+    "text": "🎯 Product roadmap v2.1 is ready for review. Key changes: \n*✓ New analytics dashboard*\n*✓ Mobile app improvements*\n*✓ API rate limit increases*",
+    "ts": "1767623400.000000",
+    "team": "T001BRYD",
+    "replace_original": false,
+    "metadata": {
+      "event_type": "migration_source",
+      "event_payload": {
+        "teams_id": "MSG_003",
+        "teams_user_id": "T-USER-77",
+        "migration_timestamp": "2026-01-09T00:44:38.151147"
+      }
+    },
+    "files": [
+      {
+        "title": "Product_Roadmap_2026.pptx",
+        "url": "https://sharepoint.com/sites/product/Product_Roadmap_2026.pptx",
+        "teams_ref_id": "FILE_004"
+      }
+    ]
+  },
+  {
+    "type": "message",
+    "user": "U01ABC",
+    "text": "Excellent work Elena! The timeline looks aggressive. When can we demo the analytics dashboard to stakeholders?",
+    "ts": "1767625533.000000",
+    "team": "T001BRYD",
+    "replace_original": false,
+    "metadata": {
+      "event_type": "migration_source",
+      "event_payload": {
+        "teams_id": "MSG_003_R1",
+        "teams_user_id": "T-USER-99",
+        "migration_timestamp": "2026-01-09T00:44:38.151179"
+      }
+    },
+    "thread_ts": "1767623400.000000",
+    "parent_user_id": "U_UNKNOWN_5027dfb7"
+  },
+  {
+    "type": "message",
+    "user": "U_UNKNOWN_5027dfb7",
+    "text": "We can have a *live demo ready by Jan 20th*. I'm coordinating with QA to ensure the analytics data is accurate. Should I schedule the stakeholder meeting?",
+    "ts": "1767627615.000000",
+    "team": "T001BRYD",
+    "replace_original": false,
+    "metadata": {
+      "event_type": "migration_source",
+      "event_payload": {
+        "teams_id": "MSG_003_R2",
+        "teams_user_id": "T-USER-77",
+        "migration_timestamp": "2026-01-09T00:44:38.151208"
+      }
+    },
+    "thread_ts": "1767623400.000000",
+    "parent_user_id": "U_UNKNOWN_5027dfb7"
+  }
+]

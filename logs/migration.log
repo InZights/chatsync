@@ -1,0 +1,57 @@
+2026-01-08 15:58:02,294 - INFO - Starting Teams to Slack migration...
+2026-01-08 15:58:02,348 - INFO - Processing 1 parent messages from data/input/teams_convo.json
+2026-01-08 15:58:02,350 - INFO - [OK] Exported 2 messages to data/output\2026-01-08.json
+2026-01-08 15:58:02,350 - INFO - Total exported: 2 messages
+2026-01-08 15:58:02,352 - INFO - Migration completed successfully
+2026-01-08 16:01:18,472 - INFO - Starting Teams to Slack migration...
+2026-01-08 16:01:18,477 - INFO - Processing 1 parent messages from data/input/teams_convo.json
+2026-01-08 16:01:18,479 - INFO - [OK] Exported 2 messages to data/output\2026-01-08.json
+2026-01-08 16:01:18,479 - INFO - Total exported: 2 messages
+2026-01-08 16:01:18,480 - INFO - Migration completed successfully
+2026-01-08 16:04:55,463 - INFO - Starting Teams to Slack migration...
+2026-01-08 16:04:55,470 - INFO - Processing 1 parent messages from data/input/teams_convo.json
+2026-01-08 16:04:55,472 - INFO - [OK] Exported 2 messages to data/output\2026-01-08.json
+2026-01-08 16:04:55,472 - INFO - Total exported: 2 messages
+2026-01-08 16:04:55,474 - INFO - Migration completed successfully
+2026-01-08 16:09:03,929 - INFO - Starting Teams to Slack migration...
+2026-01-08 16:09:03,936 - INFO - Processing 1 parent messages from data/input/teams_convo.json
+2026-01-08 16:09:03,938 - INFO - [OK] Exported 2 messages to data/output\2026-01-08.json
+2026-01-08 16:09:03,939 - INFO - Total exported: 2 messages
+2026-01-08 16:09:03,940 - INFO - Migration completed successfully
+2026-01-08 16:10:46,051 - INFO - Starting Teams to Slack migration...
+2026-01-08 16:10:46,058 - INFO - Processing 1 parent messages from data/input/teams_convo.json
+2026-01-08 16:10:46,060 - INFO - [OK] Exported 2 messages to data/output\2026-01-08.json
+2026-01-08 16:10:46,060 - INFO - Total exported: 2 messages
+2026-01-08 16:10:46,061 - INFO - Migration completed successfully
+2026-01-08 16:12:19,056 - INFO - Starting Teams to Slack migration...
+2026-01-08 16:12:19,083 - INFO - Processing 10 parent messages from data/input/teams_convo.json
+2026-01-08 16:12:19,087 - INFO - [OK] Exported 9 messages to data/output\2026-01-05.json
+2026-01-08 16:12:19,089 - INFO - [OK] Exported 9 messages to data/output\2026-01-06.json
+2026-01-08 16:12:19,090 - INFO - [OK] Exported 7 messages to data/output\2026-01-07.json
+2026-01-08 16:12:19,092 - INFO - [OK] Exported 5 messages to data/output\2026-01-08.json
+2026-01-08 16:12:19,092 - INFO - Total exported: 30 messages
+2026-01-08 16:12:19,094 - INFO - Migration completed successfully
+2026-01-08 16:12:23,403 - INFO - Starting Teams to Slack migration...
+2026-01-08 16:12:23,410 - INFO - Processing 10 parent messages from data/input/teams_convo.json
+2026-01-08 16:12:23,413 - INFO - [OK] Exported 9 messages to data/output\2026-01-05.json
+2026-01-08 16:12:23,414 - INFO - [OK] Exported 9 messages to data/output\2026-01-06.json
+2026-01-08 16:12:23,416 - INFO - [OK] Exported 7 messages to data/output\2026-01-07.json
+2026-01-08 16:12:23,417 - INFO - [OK] Exported 5 messages to data/output\2026-01-08.json
+2026-01-08 16:12:23,417 - INFO - Total exported: 30 messages
+2026-01-08 16:12:23,418 - INFO - Migration completed successfully
+2026-01-09 00:43:46,721 - INFO - Starting Teams to Slack migration...
+2026-01-09 00:43:46,787 - INFO - Processing 10 parent messages from data/input/teams_convo.json
+2026-01-09 00:43:46,791 - INFO - [OK] Exported 9 messages to data/output\2026-01-05.json
+2026-01-09 00:43:46,792 - INFO - [OK] Exported 9 messages to data/output\2026-01-06.json
+2026-01-09 00:43:46,794 - INFO - [OK] Exported 7 messages to data/output\2026-01-07.json
+2026-01-09 00:43:46,795 - INFO - [OK] Exported 5 messages to data/output\2026-01-08.json
+2026-01-09 00:43:46,795 - INFO - Total exported: 30 messages
+2026-01-09 00:43:46,797 - INFO - Migration completed successfully
+2026-01-09 00:44:38,145 - INFO - Starting Teams to Slack migration...
+2026-01-09 00:44:38,150 - INFO - Processing 10 parent messages from data/input/teams_convo.json
+2026-01-09 00:44:38,153 - INFO - [OK] Exported 9 messages to data/output\2026-01-05.json
+2026-01-09 00:44:38,155 - INFO - [OK] Exported 9 messages to data/output\2026-01-06.json
+2026-01-09 00:44:38,156 - INFO - [OK] Exported 7 messages to data/output\2026-01-07.json
+2026-01-09 00:44:38,157 - INFO - [OK] Exported 5 messages to data/output\2026-01-08.json
+2026-01-09 00:44:38,157 - INFO - Total exported: 30 messages
+2026-01-09 00:44:38,159 - INFO - Migration completed successfully

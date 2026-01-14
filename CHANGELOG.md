@@ -1,6 +1,6 @@
 # Changelog
 
-All notable changes to ConvoHub will be documented in this file.
+All notable changes to ChatSync will be documented in this file.
 
 The format is based on [Keep a Changelog](https://keepachangelog.com/en/1.0.0/),
 and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0.html).
@@ -20,7 +20,7 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 ## [1.0.0] - 2026-01-15
 
 ### Added
-- Initial release of ConvoHub
+- Initial release of ChatSync
 - Microsoft Teams data fetching via Graph API
 - Teams to Slack format migration
 - Salesforce Data Cloud integration
@@ -73,7 +73,7 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 
 ### Version 1.0.0 - Initial Release
 
-This is the first production-ready release of ConvoHub (formerly TS_BRIDGE). ConvoHub is now a complete enterprise conversation data platform with support for:
+This is the first production-ready release of ChatSync (formerly TS_BRIDGE). ChatSync is now a complete enterprise conversation data platform with support for:
 
 **Multi-Platform Integration:**
 - ✅ Microsoft Teams (source)
@@ -98,5 +98,5 @@ Thank you to everyone who contributed to making this release possible!
 
 ---
 
-[Unreleased]: https://github.com/yourusername/convohub/compare/v1.0.0...HEAD
-[1.0.0]: https://github.com/yourusername/convohub/releases/tag/v1.0.0
+[Unreleased]: https://github.com/yourusername/chatsync/compare/v1.0.0...HEAD
+[1.0.0]: https://github.com/yourusername/chatsync/releases/tag/v1.0.0

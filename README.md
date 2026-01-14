@@ -1,6 +1,6 @@
 <div align="center">
 
-# 🌉 ConvoHub
+# 💬 ChatSync
 
 ### **Enterprise Conversation Data Platform**
 
@@ -18,7 +18,7 @@
 
 ## 📋 Overview
 
-**ConvoHub** is a production-grade data pipeline that extracts conversation data from Microsoft Teams, transforms it into standardized formats, and loads it into multiple destinations including Slack and Salesforce Data Cloud. Built for enterprise scale (1K to 10M+ messages), it enables conversation analytics, customer 360 views, and AI-powered insights.
+**ChatSync** is a production-grade data pipeline that extracts conversation data from Microsoft Teams, transforms it into standardized formats, and loads it into multiple destinations including Slack and Salesforce Data Cloud. Built for enterprise scale (1K to 10M+ messages), it enables conversation analytics, customer 360 views, and AI-powered insights.
 
 
 ### What It Does
@@ -26,7 +26,7 @@
 ```
 ┌──────────────┐      ┌──────────────┐      ┌──────────────┐      ┌──────────────┐
 │   Microsoft  │      │              │      │              │      │  Salesforce  │
-│    Teams     │ ───> │   ConvoHub   │ ───> │    Slack     │      │ Data Cloud   │
+│    Teams     │ ───> │   ChatSync   │ ───> │    Slack     │      │ Data Cloud   │
 │              │      │  (Transform) │      │              │      │  (Analytics) │
 └──────────────┘      └──────────────┘      └──────────────┘      └──────────────┘
    Messages                  │                   Messages            AI/ML Models
@@ -152,8 +152,8 @@
 
 ```bash
 # Clone the repository
-git clone https://github.com/yourusername/convohub.git
-cd convohub
+git clone https://github.com/yourusername/chatsync.git
+cd chatsync
 
 # Install dependencies
 pip install -r requirements.txt
@@ -630,7 +630,7 @@ This project is licensed under the MIT License - see the [LICENSE](LICENSE) file
 ```
 MIT License
 
-Copyright (c) 2026 ConvoHub
+Copyright (c) 2026 ChatSync
 
 Permission is hereby granted, free of charge, to any person obtaining a copy
 of this software and associated documentation files (the "Software"), to deal
@@ -664,11 +664,11 @@ FITNESS FOR A PARTICULAR PURPOSE AND NONINFRINGEMENT.
 
 **Need Help?**
 
-[📖 Documentation](docs/) • [💬 Discussions](https://github.com/yourusername/convohub/discussions) • [🐛 Issues](https://github.com/yourusername/convohub/issues)
+[📖 Documentation](docs/) • [💬 Discussions](https://github.com/yourusername/chatsync/discussions) • [🐛 Issues](https://github.com/yourusername/chatsync/issues)
 
 ---
 
-**Made with ❤️ by the ConvoHub Team**
+**Made with ❤️ by the ChatSync Team**
 
 ⭐ **Star this repo** if you find it useful!
 

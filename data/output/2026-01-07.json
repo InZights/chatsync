@@ -1,0 +1,131 @@
+[
+  {
+    "type": "message",
+    "user": "U_UNKNOWN_5027dfb7",
+    "text": "Team announcement: We're launching the *Developer Partner Program* starting Feb 1st! Looking for volunteers to help build the onboarding docs. 🚀",
+    "ts": "1767776400.000000",
+    "team": "T001BRYD",
+    "replace_original": false,
+    "metadata": {
+      "event_type": "migration_source",
+      "event_payload": {
+        "teams_id": "MSG_007",
+        "teams_user_id": "T-USER-77",
+        "migration_timestamp": "2026-01-09T00:44:38.151501"
+      }
+    }
+  },
+  {
+    "type": "message",
+    "user": "U_UNKNOWN_dba6775d",
+    "text": "Count me in! I can help with the API documentation section.",
+    "ts": "1767778215.000000",
+    "team": "T001BRYD",
+    "replace_original": false,
+    "metadata": {
+      "event_type": "migration_source",
+      "event_payload": {
+        "teams_id": "MSG_007_R1",
+        "teams_user_id": "T-USER-22",
+        "migration_timestamp": "2026-01-09T00:44:38.151527"
+      }
+    },
+    "thread_ts": "1767776400.000000",
+    "parent_user_id": "U_UNKNOWN_5027dfb7"
+  },
+  {
+    "type": "message",
+    "user": "U_UNKNOWN_08916548",
+    "text": "I'll handle the getting-started guide and sample code examples.",
+    "ts": "1767779122.000000",
+    "team": "T001BRYD",
+    "replace_original": false,
+    "metadata": {
+      "event_type": "migration_source",
+      "event_payload": {
+        "teams_id": "MSG_007_R2",
+        "teams_user_id": "T-USER-11",
+        "migration_timestamp": "2026-01-09T00:44:38.151551"
+      }
+    },
+    "thread_ts": "1767776400.000000",
+    "parent_user_id": "U_UNKNOWN_5027dfb7"
+  },
+  {
+    "type": "message",
+    "user": "U_UNKNOWN_134e0d9a",
+    "text": "I can support with security best practices documentation.",
+    "ts": "1767780000.000000",
+    "team": "T001BRYD",
+    "replace_original": false,
+    "metadata": {
+      "event_type": "migration_source",
+      "event_payload": {
+        "teams_id": "MSG_007_R3",
+        "teams_user_id": "T-USER-55",
+        "migration_timestamp": "2026-01-09T00:44:38.151577"
+      }
+    },
+    "thread_ts": "1767776400.000000",
+    "parent_user_id": "U_UNKNOWN_5027dfb7"
+  },
+  {
+    "type": "message",
+    "user": "U02XYZ",
+    "text": "Quick sync on the *Global Tech* deal status: Contract signed! 🎉 Moving to implementation phase. Kickoff meeting scheduled for Jan 10th.",
+    "ts": "1767795600.000000",
+    "team": "T001BRYD",
+    "replace_original": false,
+    "metadata": {
+      "event_type": "migration_source",
+      "event_payload": {
+        "teams_id": "MSG_008",
+        "teams_user_id": "T-USER-44",
+        "migration_timestamp": "2026-01-09T00:44:38.151609"
+      }
+    },
+    "files": [
+      {
+        "title": "GlobalTech_ExecutedContract.pdf",
+        "url": "https://sharepoint.com/sites/contracts/GlobalTech_ExecutedContract.pdf",
+        "teams_ref_id": "FILE_008"
+      }
+    ]
+  },
+  {
+    "type": "message",
+    "user": "U_UNKNOWN_dba6775d",
+    "text": "Excellent! I'll make sure the infrastructure is ready for the kickoff. What's the deployment timeline?",
+    "ts": "1767797130.000000",
+    "team": "T001BRYD",
+    "replace_original": false,
+    "metadata": {
+      "event_type": "migration_source",
+      "event_payload": {
+        "teams_id": "MSG_008_R1",
+        "teams_user_id": "T-USER-22",
+        "migration_timestamp": "2026-01-09T00:44:38.151637"
+      }
+    },
+    "thread_ts": "1767795600.000000",
+    "parent_user_id": "U02XYZ"
+  },
+  {
+    "type": "message",
+    "user": "U02XYZ",
+    "text": "Go-live target is *Feb 28th*. That gives us 7 weeks to implement. I'll send the detailed project plan tomorrow.",
+    "ts": "1767798645.000000",
+    "team": "T001BRYD",
+    "replace_original": false,
+    "metadata": {
+      "event_type": "migration_source",
+      "event_payload": {
+        "teams_id": "MSG_008_R2",
+        "teams_user_id": "T-USER-44",
+        "migration_timestamp": "2026-01-09T00:44:38.151661"
+      }
+    },
+    "thread_ts": "1767795600.000000",
+    "parent_user_id": "U02XYZ"
+  }
+]

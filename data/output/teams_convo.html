@@ -1,0 +1,866 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Teams Conversation Viewer</title>
+  <style>
+    :root {
+      --bg: #f5f7fb;
+      --panel: #ffffff;
+      --text: #1f2937;
+      --muted: #6b7280;
+      --accent: #2563eb;
+      --border: #e5e7eb;
+      --reply-border: #dbeafe;
+      --chip-bg: #eef2ff;
+      --chip-text: #3730a3;
+    }
+
+    * { box-sizing: border-box; }
+    html, body { height: 100%; margin: 0; font-family: Segoe UI, Roboto, Helvetica, Arial, sans-serif; color: var(--text); }
+    body { background: var(--bg); }
+
+    .app {
+      display: grid;
+      grid-template-rows: 64px 1fr;
+      height: 100vh;
+    }
+
+    .topbar {
+      display: flex; align-items: center; gap: 12px;
+      padding: 16px 20px;
+      background: var(--panel);
+      border-bottom: 1px solid var(--border);
+      position: sticky; top: 0; z-index: 2;
+    }
+
+    .topbar .title { font-size: 18px; font-weight: 600; }
+    .topbar .subtitle { color: var(--muted); font-size: 12px; }
+
+    .content {
+      height: 100%; overflow: hidden; display: grid; grid-template-rows: 1fr;
+    }
+
+    .scroll {
+      overflow-y: auto; height: 100%; padding: 16px; scroll-behavior: smooth;
+    }
+
+    .day {
+      margin: 16px 0; position: relative; text-align: center;
+    }
+    .day .line { border-top: 1px solid var(--border); }
+    .day .label {
+      position: relative; top: -12px; display: inline-block; padding: 2px 10px; background: var(--bg);
+      color: var(--muted); font-size: 12px;
+    }
+
+    .message {
+      display: grid; grid-template-columns: 40px 1fr; gap: 12px; padding: 12px; border-radius: 8px;
+      background: var(--panel); border: 1px solid var(--border);
+    }
+    .message + .message { margin-top: 10px; }
+
+    .avatar {
+      width: 40px; height: 40px; border-radius: 50%; background: #c7d2fe; color: #3730a3;
+      display: grid; place-items: center; font-weight: 700;
+    }
+
+    .meta { display: flex; align-items: baseline; gap: 8px; }
+    .name { font-weight: 600; }
+    .time { color: var(--muted); font-size: 12px; }
+
+    .body { margin-top: 6px; }
+    .body :is(p, div) { margin: 0.3em 0; }
+
+    .attachments { margin-top: 8px; display: flex; flex-wrap: wrap; gap: 6px; }
+    .attachment { font-size: 12px; padding: 4px 8px; background: #ecfeff; color: #0e7490; border: 1px solid #bae6fd; border-radius: 999px; text-decoration: none; }
+
+    .reactions { margin-top: 8px; display: flex; align-items: center; gap: 6px; }
+    .chip { font-size: 12px; padding: 2px 6px; border-radius: 999px; background: var(--chip-bg); color: var(--chip-text); border: 1px solid #c7d2fe; }
+
+    .thread {
+      margin-top: 10px; border-left: 3px solid var(--reply-border); padding-left: 10px; display: grid; gap: 8px;
+    }
+
+    .reply { background: #fafafa; border: 1px solid var(--border); border-radius: 8px; padding: 10px; display: grid; grid-template-columns: 32px 1fr; gap: 10px; }
+    .reply .avatar { width: 32px; height: 32px; font-size: 12px; }
+
+    .footer-note { color: var(--muted); font-size: 12px; text-align: center; margin: 18px 0; }
+
+    a { color: var(--accent); text-decoration: none; }
+    a:hover { text-decoration: underline; }
+
+    /* Theme support and overrides */
+    :root {
+      --chip-border: #c7d2fe;
+      --avatar-bg: #c7d2fe;
+      --avatar-text: #3730a3;
+      --attachment-bg: #ecfeff;
+      --attachment-text: #0e7490;
+      --attachment-border: #bae6fd;
+      --reply-bg: #fafafa;
+    }
+
+    @media (prefers-color-scheme: dark) {
+      :root {
+        --bg: #0b1220;
+        --panel: #0f172a;
+        --text: #e5e7eb;
+        --muted: #94a3b8;
+        --accent: #60a5fa;
+        --border: #1f2a44;
+        --reply-border: #1e293b;
+        --chip-bg: #1e293b;
+        --chip-text: #c7d2fe;
+        --chip-border: #334155;
+        --avatar-bg: #1e293b;
+        --avatar-text: #c7d2fe;
+        --attachment-bg: #0b2e36;
+        --attachment-text: #7dd3fc;
+        --attachment-border: #164e63;
+        --reply-bg: #0b1526;
+      }
+    }
+
+    :root[data-theme="dark"] {
+      --bg: #0b1220;
+      --panel: #0f172a;
+      --text: #e5e7eb;
+      --muted: #94a3b8;
+      --accent: #60a5fa;
+      --border: #1f2a44;
+      --reply-border: #1e293b;
+      --chip-bg: #1e293b;
+      --chip-text: #c7d2fe;
+      --chip-border: #334155;
+      --avatar-bg: #1e293b;
+      --avatar-text: #c7d2fe;
+      --attachment-bg: #0b2e36;
+      --attachment-text: #7dd3fc;
+      --attachment-border: #164e63;
+      --reply-bg: #0b1526;
+    }
+
+    /* Override specific components to use theme vars */
+    .avatar { background: var(--avatar-bg); color: var(--avatar-text); }
+    .attachment { background: var(--attachment-bg); color: var(--attachment-text); border-color: var(--attachment-border); }
+    .chip { border-color: var(--chip-border); }
+    .reply { background: var(--reply-bg); }
+    .topbar .spacer { flex: 1; }
+    .theme-btn { margin-left: auto; padding: 6px 10px; border-radius: 8px; background: var(--panel); color: var(--text); border: 1px solid var(--border); cursor: pointer; font-size: 12px; }
+    .theme-btn:hover { border-color: var(--accent); }
+  </style>
+</head>
+<body>
+  <div class="app">
+    <div class="topbar">
+      <div>
+        <div class="title">Teams Conversation Viewer</div>
+        <div class="subtitle">Rendering data/input/teams_convo.json</div>
+      </div>
+      <div class="spacer"></div>
+      <button id="theme-toggle" class="theme-btn" aria-label="Toggle dark mode">🌙 Dark</button>
+    </div>
+    <div class="content">
+      <div id="list" class="scroll"></div>
+    </div>
+  </div>
+
+  <!-- Embedded JSON payload -->
+  <script id="teams-data" type="application/json">
+[
+  {
+    "id": "MSG_001",
+    "createdDateTime": "2026-01-05T09:15:00Z",
+    "from": {
+      "user": { "id": "T-USER-99", "displayName": "Sarah Jenkins" }
+    },
+    "body": {
+      "contentType": "html",
+      "content": "<div>Good morning team! 📊 Let's kick off the Q1 planning session. I've prepared the initial budget forecast for discussion.</div>"
+    },
+    "importance": "high",
+    "reactions": [],
+    "attachments": [
+      {
+        "id": "FILE_001",
+        "name": "Q1_Budget_Forecast_2026.xlsx",
+        "contentType": "reference",
+        "contentUrl": "https://sharepoint.com/sites/planning/Q1_Budget_Forecast_2026.xlsx"
+      }
+    ],
+    "replies": [
+      {
+        "id": "MSG_001_R1",
+        "replyToId": "MSG_001",
+        "createdDateTime": "2026-01-05T09:32:15Z",
+        "from": {
+          "user": { "id": "T-USER-44", "displayName": "Dave Miller" }
+        },
+        "body": {
+          "contentType": "html",
+          "content": "<div>Thanks Sarah! I reviewed it. The engineering allocation looks good, but I'd like to discuss the <b>marketing budget</b> increase.</div>"
+        },
+        "attachments": [],
+        "reactions": []
+      },
+      {
+        "id": "MSG_001_R2",
+        "replyToId": "MSG_001",
+        "createdDateTime": "2026-01-05T10:05:42Z",
+        "from": {
+          "user": { "id": "T-USER-77", "displayName": "Elena Rodriguez" }
+        },
+        "body": {
+          "contentType": "html",
+          "content": "<div>I agree with Dave. The 20% increase is justified given our new product launch timeline. Here's the detailed ROI analysis: <br/><b>Expected revenue impact: +$2.3M</b></div>"
+        },
+        "attachments": [
+          {
+            "id": "FILE_002",
+            "name": "Marketing_ROI_Analysis.pdf",
+            "contentType": "reference",
+            "contentUrl": "https://sharepoint.com/sites/planning/Marketing_ROI_Analysis.pdf"
+          }
+        ],
+        "reactions": [
+          { "reactionType": "like", "user": { "id": "T-USER-99", "displayName": "Sarah Jenkins" } },
+          { "reactionType": "like", "user": { "id": "T-USER-44", "displayName": "Dave Miller" } }
+        ]
+      }
+    ]
+  },
+  {
+    "id": "MSG_002",
+    "createdDateTime": "2026-01-05T11:20:30Z",
+    "from": {
+      "user": { "id": "T-USER-44", "displayName": "Dave Miller" }
+    },
+    "body": {
+      "contentType": "html",
+      "content": "<div>FYI team - the @Global Tech client contract is <i>under review</i>. Legal expects sign-off by EOW.</div>"
+    },
+    "importance": "normal",
+    "reactions": [],
+    "attachments": [],
+    "replies": [
+      {
+        "id": "MSG_002_R1",
+        "replyToId": "MSG_002",
+        "createdDateTime": "2026-01-05T11:45:00Z",
+        "from": {
+          "user": { "id": "T-USER-22", "displayName": "Michael Chen" }
+        },
+        "body": {
+          "contentType": "html",
+          "content": "<div>Great! That's ahead of schedule. Should we start provisioning the infrastructure?</div>"
+        },
+        "attachments": [],
+        "reactions": []
+      },
+      {
+        "id": "MSG_002_R2",
+        "replyToId": "MSG_002",
+        "createdDateTime": "2026-01-05T12:15:22Z",
+        "from": {
+          "user": { "id": "T-USER-44", "displayName": "Dave Miller" }
+        },
+        "body": {
+          "contentType": "html",
+          "content": "<div>Yes, good idea. Michael, can you coordinate with DevOps? I'll send you the technical requirements doc.</div>"
+        },
+        "attachments": [
+          {
+            "id": "FILE_003",
+            "name": "GlobalTech_TechSpecs.docx",
+            "contentType": "reference",
+            "contentUrl": "https://sharepoint.com/sites/clients/GlobalTech_TechSpecs.docx"
+          }
+        ],
+        "reactions": []
+      }
+    ]
+  },
+  {
+    "id": "MSG_003",
+    "createdDateTime": "2026-01-05T14:30:00Z",
+    "from": {
+      "user": { "id": "T-USER-77", "displayName": "Elena Rodriguez" }
+    },
+    "body": {
+      "contentType": "html",
+      "content": "<div>🎯 Product roadmap v2.1 is ready for review. Key changes: <br/><b>✓ New analytics dashboard</b><br/><b>✓ Mobile app improvements</b><br/><b>✓ API rate limit increases</b></div>"
+    },
+    "importance": "high",
+    "reactions": [],
+    "attachments": [
+      {
+        "id": "FILE_004",
+        "name": "Product_Roadmap_2026.pptx",
+        "contentType": "reference",
+        "contentUrl": "https://sharepoint.com/sites/product/Product_Roadmap_2026.pptx"
+      }
+    ],
+    "replies": [
+      {
+        "id": "MSG_003_R1",
+        "replyToId": "MSG_003",
+        "createdDateTime": "2026-01-05T15:05:33Z",
+        "from": {
+          "user": { "id": "T-USER-99", "displayName": "Sarah Jenkins" }
+        },
+        "body": {
+          "contentType": "html",
+          "content": "<div>Excellent work Elena! The timeline looks aggressive. When can we demo the analytics dashboard to stakeholders?</div>"
+        },
+        "attachments": [],
+        "reactions": [
+          { "reactionType": "love", "user": { "id": "T-USER-77", "displayName": "Elena Rodriguez" } }
+        ]
+      },
+      {
+        "id": "MSG_003_R2",
+        "replyToId": "MSG_003",
+        "createdDateTime": "2026-01-05T15:40:15Z",
+        "from": {
+          "user": { "id": "T-USER-77", "displayName": "Elena Rodriguez" }
+        },
+        "body": {
+          "contentType": "html",
+          "content": "<div>We can have a <b>live demo ready by Jan 20th</b>. I'm coordinating with QA to ensure the analytics data is accurate. Should I schedule the stakeholder meeting?</div>"
+        },
+        "attachments": [],
+        "reactions": []
+      }
+    ]
+  },
+  {
+    "id": "MSG_004",
+    "createdDateTime": "2026-01-06T08:00:00Z",
+    "from": {
+      "user": { "id": "T-USER-22", "displayName": "Michael Chen" }
+    },
+    "body": {
+      "contentType": "html",
+      "content": "<div>Infrastructure update: All staging servers are now running on the new <i>Kubernetes cluster</i>. Performance metrics look solid.</div>"
+    },
+    "importance": "normal",
+    "reactions": [],
+    "attachments": [
+      {
+        "id": "FILE_005",
+        "name": "K8s_Performance_Report.pdf",
+        "contentType": "reference",
+        "contentUrl": "https://sharepoint.com/sites/devops/K8s_Performance_Report.pdf"
+      }
+    ],
+    "replies": [
+      {
+        "id": "MSG_004_R1",
+        "replyToId": "MSG_004",
+        "createdDateTime": "2026-01-06T08:45:22Z",
+        "from": {
+          "user": { "id": "T-USER-55", "displayName": "Lisa Park" }
+        },
+        "body": {
+          "contentType": "html",
+          "content": "<div>Great! What about the database migration? Any issues with the replication lag?</div>"
+        },
+        "attachments": [],
+        "reactions": []
+      },
+      {
+        "id": "MSG_004_R2",
+        "replyToId": "MSG_004",
+        "createdDateTime": "2026-01-06T09:20:10Z",
+        "from": {
+          "user": { "id": "T-USER-22", "displayName": "Michael Chen" }
+        },
+        "body": {
+          "contentType": "html",
+          "content": "<div>Lag is <b>&lt;100ms</b> which is within acceptable limits. We're monitoring closely. Next phase: production failover testing scheduled for next week.</div>"
+        },
+        "attachments": [],
+        "reactions": [
+          { "reactionType": "like", "user": { "id": "T-USER-55", "displayName": "Lisa Park" } }
+        ]
+      }
+    ]
+  },
+  {
+    "id": "MSG_005",
+    "createdDateTime": "2026-01-06T10:15:00Z",
+    "from": {
+      "user": { "id": "T-USER-55", "displayName": "Lisa Park" }
+    },
+    "body": {
+      "contentType": "html",
+      "content": "<div>Security audit results are in. We passed all critical items but have 3 <b>medium priority</b> findings to address. Full report attached.</div>"
+    },
+    "importance": "high",
+    "reactions": [],
+    "attachments": [
+      {
+        "id": "FILE_006",
+        "name": "Security_Audit_Report_2026.pdf",
+        "contentType": "reference",
+        "contentUrl": "https://sharepoint.com/sites/security/Security_Audit_Report_2026.pdf"
+      }
+    ],
+    "replies": [
+      {
+        "id": "MSG_005_R1",
+        "replyToId": "MSG_005",
+        "createdDateTime": "2026-01-06T10:50:45Z",
+        "from": {
+          "user": { "id": "T-USER-22", "displayName": "Michael Chen" }
+        },
+        "body": {
+          "contentType": "html",
+          "content": "<div>Good news! What are the remediation timelines? Can we get them resolved before the Global Tech onboarding?</div>"
+        },
+        "attachments": [],
+        "reactions": []
+      },
+      {
+        "id": "MSG_005_R2",
+        "replyToId": "MSG_005",
+        "createdDateTime": "2026-01-06T11:25:30Z",
+        "from": {
+          "user": { "id": "T-USER-55", "displayName": "Lisa Park" }
+        },
+        "body": {
+          "contentType": "html",
+          "content": "<div>Yes, all 3 items will be resolved by <b>Jan 15th</b>. That gives us 2 weeks buffer before the Global Tech deployment.</div>"
+        },
+        "attachments": [],
+        "reactions": []
+      }
+    ]
+  },
+  {
+    "id": "MSG_006",
+    "createdDateTime": "2026-01-06T13:45:00Z",
+    "from": {
+      "user": { "id": "T-USER-11", "displayName": "James Wilson" }
+    },
+    "body": {
+      "contentType": "html",
+      "content": "<div>Customer support metrics for December: <br/><b>Avg response time: 2.3 hours</b><br/><b>Customer satisfaction: 92%</b><br/><b>Ticket volume: 1,247</b></div>"
+    },
+    "importance": "normal",
+    "reactions": [],
+    "attachments": [
+      {
+        "id": "FILE_007",
+        "name": "Support_Metrics_December_2025.csv",
+        "contentType": "reference",
+        "contentUrl": "https://sharepoint.com/sites/support/Support_Metrics_December_2025.csv"
+      }
+    ],
+    "replies": [
+      {
+        "id": "MSG_006_R1",
+        "replyToId": "MSG_006",
+        "createdDateTime": "2026-01-06T14:15:22Z",
+        "from": {
+          "user": { "id": "T-USER-99", "displayName": "Sarah Jenkins" }
+        },
+        "body": {
+          "contentType": "html",
+          "content": "<div>Excellent results James! The 92% satisfaction is our best result yet. Are we seeing any trending issues?</div>"
+        },
+        "attachments": [],
+        "reactions": []
+      },
+      {
+        "id": "MSG_006_R2",
+        "replyToId": "MSG_006",
+        "createdDateTime": "2026-01-06T14:50:00Z",
+        "from": {
+          "user": { "id": "T-USER-11", "displayName": "James Wilson" }
+        },
+        "body": {
+          "contentType": "html",
+          "content": "<div>Yes, two main trends:<br/>1. <b>API documentation</b> - 18% of tickets<br/>2. <b>Performance tuning</b> - 12% of tickets<br/>I recommend we prioritize these in the roadmap.</div>"
+        },
+        "attachments": [],
+        "reactions": [
+          { "reactionType": "like", "user": { "id": "T-USER-99", "displayName": "Sarah Jenkins" } },
+          { "reactionType": "like", "user": { "id": "T-USER-77", "displayName": "Elena Rodriguez" } }
+        ]
+      }
+    ]
+  },
+  {
+    "id": "MSG_007",
+    "createdDateTime": "2026-01-07T09:00:00Z",
+    "from": {
+      "user": { "id": "T-USER-77", "displayName": "Elena Rodriguez" }
+    },
+    "body": {
+      "contentType": "html",
+      "content": "<div>Team announcement: We're launching the <b>Developer Partner Program</b> starting Feb 1st! Looking for volunteers to help build the onboarding docs. 🚀</div>"
+    },
+    "importance": "high",
+    "reactions": [
+      { "reactionType": "love", "user": { "id": "T-USER-99", "displayName": "Sarah Jenkins" } },
+      { "reactionType": "like", "user": { "id": "T-USER-44", "displayName": "Dave Miller" } }
+    ],
+    "attachments": [],
+    "replies": [
+      {
+        "id": "MSG_007_R1",
+        "replyToId": "MSG_007",
+        "createdDateTime": "2026-01-07T09:30:15Z",
+        "from": {
+          "user": { "id": "T-USER-22", "displayName": "Michael Chen" }
+        },
+        "body": {
+          "contentType": "html",
+          "content": "<div>Count me in! I can help with the API documentation section.</div>"
+        },
+        "attachments": [],
+        "reactions": []
+      },
+      {
+        "id": "MSG_007_R2",
+        "replyToId": "MSG_007",
+        "createdDateTime": "2026-01-07T09:45:22Z",
+        "from": {
+          "user": { "id": "T-USER-11", "displayName": "James Wilson" }
+        },
+        "body": {
+          "contentType": "html",
+          "content": "<div>I'll handle the getting-started guide and sample code examples.</div>"
+        },
+        "attachments": [],
+        "reactions": []
+      },
+      {
+        "id": "MSG_007_R3",
+        "replyToId": "MSG_007",
+        "createdDateTime": "2026-01-07T10:00:00Z",
+        "from": {
+          "user": { "id": "T-USER-55", "displayName": "Lisa Park" }
+        },
+        "body": {
+          "contentType": "html",
+          "content": "<div>I can support with security best practices documentation.</div>"
+        },
+        "attachments": [],
+        "reactions": []
+      }
+    ]
+  },
+  {
+    "id": "MSG_008",
+    "createdDateTime": "2026-01-07T14:20:00Z",
+    "from": {
+      "user": { "id": "T-USER-44", "displayName": "Dave Miller" }
+    },
+    "body": {
+      "contentType": "html",
+      "content": "<div>Quick sync on the <b>Global Tech</b> deal status: Contract signed! 🎉 Moving to implementation phase. Kickoff meeting scheduled for Jan 10th.</div>"
+    },
+    "importance": "high",
+    "reactions": [
+      { "reactionType": "love", "user": { "id": "T-USER-99", "displayName": "Sarah Jenkins" } },
+      { "reactionType": "like", "user": { "id": "T-USER-77", "displayName": "Elena Rodriguez" } },
+      { "reactionType": "like", "user": { "id": "T-USER-44", "displayName": "Dave Miller" } }
+    ],
+    "attachments": [
+      {
+        "id": "FILE_008",
+        "name": "GlobalTech_ExecutedContract.pdf",
+        "contentType": "reference",
+        "contentUrl": "https://sharepoint.com/sites/contracts/GlobalTech_ExecutedContract.pdf"
+      }
+    ],
+    "replies": [
+      {
+        "id": "MSG_008_R1",
+        "replyToId": "MSG_008",
+        "createdDateTime": "2026-01-07T14:45:30Z",
+        "from": {
+          "user": { "id": "T-USER-22", "displayName": "Michael Chen" }
+        },
+        "body": {
+          "contentType": "html",
+          "content": "<div>Excellent! I'll make sure the infrastructure is ready for the kickoff. What's the deployment timeline?</div>"
+        },
+        "attachments": [],
+        "reactions": []
+      },
+      {
+        "id": "MSG_008_R2",
+        "replyToId": "MSG_008",
+        "createdDateTime": "2026-01-07T15:10:45Z",
+        "from": {
+          "user": { "id": "T-USER-44", "displayName": "Dave Miller" }
+        },
+        "body": {
+          "contentType": "html",
+          "content": "<div>Go-live target is <b>Feb 28th</b>. That gives us 7 weeks to implement. I'll send the detailed project plan tomorrow.</div>"
+        },
+        "attachments": [],
+        "reactions": []
+      }
+    ]
+  },
+  {
+    "id": "MSG_009",
+    "createdDateTime": "2026-01-08T08:30:00Z",
+    "from": {
+      "user": { "id": "T-USER-99", "displayName": "Sarah Jenkins" }
+    },
+    "body": {
+      "contentType": "html",
+      "content": "<div>Weekly all-hands summary: <br/><b>✓ Revenue on track</b> (+12% vs last quarter)<br/><b>✓ New partnerships signed</b> (3 total)<br/><b>→ Hiring plan</b> adjusted for 2026</div>"
+    },
+    "importance": "high",
+    "reactions": [],
+    "attachments": [
+      {
+        "id": "FILE_009",
+        "name": "Weekly_Summary_Jan_8_2026.pptx",
+        "contentType": "reference",
+        "contentUrl": "https://sharepoint.com/sites/leadership/Weekly_Summary_Jan_8_2026.pptx"
+      }
+    ],
+    "replies": [
+      {
+        "id": "MSG_009_R1",
+        "replyToId": "MSG_009",
+        "createdDateTime": "2026-01-08T09:00:22Z",
+        "from": {
+          "user": { "id": "T-USER-77", "displayName": "Elena Rodriguez" }
+        },
+        "body": {
+          "contentType": "html",
+          "content": "<div>Great numbers! The revenue growth is exactly what we projected. Should we accelerate the product roadmap timeline?</div>"
+        },
+        "attachments": [],
+        "reactions": []
+      },
+      {
+        "id": "MSG_009_R2",
+        "replyToId": "MSG_009",
+        "createdDateTime": "2026-01-08T09:35:00Z",
+        "from": {
+          "user": { "id": "T-USER-99", "displayName": "Sarah Jenkins" }
+        },
+        "body": {
+          "contentType": "html",
+          "content": "<div>Yes, let's look at parallel development tracks. Elena, can you identify which features we can accelerate without impacting quality?</div>"
+        },
+        "attachments": [],
+        "reactions": []
+      }
+    ]
+  },
+  {
+    "id": "MSG_010",
+    "createdDateTime": "2026-01-08T11:00:00Z",
+    "from": {
+      "user": { "id": "T-USER-11", "displayName": "James Wilson" }
+    },
+    "body": {
+      "contentType": "html",
+      "content": "<div>FYI: We're deprecating the <i>v1 REST API</i> in June 2026. Migration guide is ready. All customers have been notified. Transition period: 6 months.</div>"
+    },
+    "importance": "high",
+    "reactions": [],
+    "attachments": [
+      {
+        "id": "FILE_010",
+        "name": "API_v1_Deprecation_Guide.pdf",
+        "contentType": "reference",
+        "contentUrl": "https://sharepoint.com/sites/product/API_v1_Deprecation_Guide.pdf"
+      }
+    ],
+    "replies": [
+      {
+        "id": "MSG_010_R1",
+        "replyToId": "MSG_010",
+        "createdDateTime": "2026-01-08T11:30:15Z",
+        "from": {
+          "user": { "id": "T-USER-22", "displayName": "Michael Chen" }
+        },
+        "body": {
+          "contentType": "html",
+          "content": "<div>Good timing. The v2 API adoption is already at 78%. This 6-month window should be sufficient for the remaining users to migrate.</div>"
+        },
+        "attachments": [],
+        "reactions": []
+      }
+    ]
+  }
+]
+  </script>
+
+  <script>
+    // Theme handling: saved preference or system default
+    (function initTheme() {
+      const saved = localStorage.getItem('theme');
+      const prefersDark = window.matchMedia && window.matchMedia('(prefers-color-scheme: dark)').matches;
+      const theme = (saved === 'dark' || saved === 'light') ? saved : 'dark';
+      document.documentElement.setAttribute('data-theme', theme);
+      const btn = document.getElementById('theme-toggle');
+      const setBtn = (t) => { if (btn) btn.textContent = t === 'dark' ? '☀️ Light' : '🌙 Dark'; };
+      setBtn(theme);
+      if (btn) {
+        btn.addEventListener('click', () => {
+          const current = document.documentElement.getAttribute('data-theme') === 'dark' ? 'dark' : 'light';
+          const next = current === 'dark' ? 'light' : 'dark';
+          document.documentElement.setAttribute('data-theme', next);
+          localStorage.setItem('theme', next);
+          setBtn(next);
+        });
+      }
+    })();
+    function initials(name) {
+      if (!name) return '?';
+      const parts = name.trim().split(/\s+/);
+      const first = parts[0]?.[0] || '';
+      const last = parts.length > 1 ? parts[parts.length - 1][0] : '';
+      return (first + last).toUpperCase();
+    }
+
+    function formatDate(ts) {
+      try { return new Date(ts).toLocaleString(); } catch { return ts; }
+    }
+
+    function groupByDate(messages) {
+      const byDay = new Map();
+      for (const m of messages) {
+        const d = new Date(m.createdDateTime);
+        const key = d.getFullYear() + '-' + String(d.getMonth()+1).padStart(2,'0') + '-' + String(d.getDate()).padStart(2,'0');
+        if (!byDay.has(key)) byDay.set(key, []);
+        byDay.get(key).push(m);
+      }
+      return Array.from(byDay.entries()).sort(([a],[b]) => a.localeCompare(b));
+    }
+
+    function renderReactions(container, reactions) {
+      if (!reactions || reactions.length === 0) return;
+      const counts = reactions.reduce((acc, r) => {
+        const key = r.reactionType || 'reaction';
+        acc[key] = (acc[key] || 0) + 1;
+        return acc;
+      }, {});
+      const block = document.createElement('div');
+      block.className = 'reactions';
+      for (const [type, count] of Object.entries(counts)) {
+        const chip = document.createElement('span');
+        const emoji = type === 'like' ? '👍' : (type === 'love' ? '❤️' : '🔖');
+        chip.className = 'chip';
+        chip.textContent = `${emoji} ${count}`;
+        block.appendChild(chip);
+      }
+      container.appendChild(block);
+    }
+
+    function renderAttachments(container, attachments) {
+      if (!attachments || attachments.length === 0) return;
+      const wrap = document.createElement('div');
+      wrap.className = 'attachments';
+      for (const a of attachments) {
+        const link = document.createElement('a');
+        link.className = 'attachment';
+        link.href = a.contentUrl || '#';
+        link.target = '_blank';
+        link.rel = 'noopener noreferrer';
+        link.textContent = a.name || 'Attachment';
+        wrap.appendChild(link);
+      }
+      container.appendChild(wrap);
+    }
+
+    function renderBody(container, html, contentType) {
+      const body = document.createElement('div');
+      body.className = 'body';
+      if (contentType === 'html') {
+        body.innerHTML = html || '';
+      } else {
+        body.textContent = html || '';
+      }
+      container.appendChild(body);
+    }
+
+    function renderMessage(msg, isReply = false) {
+      const el = document.createElement('div');
+      el.className = isReply ? 'reply' : 'message';
+
+      const av = document.createElement('div');
+      av.className = 'avatar';
+      av.textContent = initials(msg?.from?.user?.displayName);
+
+      const right = document.createElement('div');
+
+      const meta = document.createElement('div');
+      meta.className = 'meta';
+      const name = document.createElement('span');
+      name.className = 'name';
+      name.textContent = msg?.from?.user?.displayName || 'Unknown';
+      const time = document.createElement('span');
+      time.className = 'time';
+      time.textContent = formatDate(msg.createdDateTime);
+      meta.appendChild(name);
+      meta.appendChild(time);
+      right.appendChild(meta);
+
+      renderBody(right, msg?.body?.content, msg?.body?.contentType);
+      renderAttachments(right, msg?.attachments);
+      renderReactions(right, msg?.reactions);
+
+      el.appendChild(av);
+      el.appendChild(right);
+
+      // Replies
+      if (!isReply && Array.isArray(msg.replies) && msg.replies.length) {
+        const thread = document.createElement('div');
+        thread.className = 'thread';
+        for (const r of msg.replies) thread.appendChild(renderMessage(r, true));
+        right.appendChild(thread);
+      }
+
+      return el;
+    }
+
+    function render() {
+      const raw = document.getElementById('teams-data').textContent;
+      let data = [];
+      try { data = JSON.parse(raw); } catch (e) { console.error('Invalid JSON', e); }
+
+      const list = document.getElementById('list');
+      list.innerHTML = '';
+
+      const days = groupByDate(data);
+      for (const [day, items] of days) {
+        // Day divider
+        const dwrap = document.createElement('div');
+        dwrap.className = 'day';
+        const line = document.createElement('div'); line.className = 'line';
+        const label = document.createElement('div'); label.className = 'label'; label.textContent = day;
+        dwrap.appendChild(line); dwrap.appendChild(label);
+        list.appendChild(dwrap);
+
+        for (const msg of items) list.appendChild(renderMessage(msg));
+      }
+
+      // Scroll to top initially
+      list.scrollTop = 0;
+
+      // Footer note
+      const footer = document.createElement('div');
+      footer.className = 'footer-note';
+      footer.textContent = 'Rendered locally • Teams-like view';
+      list.appendChild(footer);
+    }
+
+    render();
+  </script>
+</body>
+</html>

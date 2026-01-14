@@ -1,6 +1,6 @@
-# Contributing to ConvoHub
+# Contributing to ChatSync
 
-First off, thank you for considering contributing to ConvoHub! It's people like you that make ConvoHub such a great tool.
+First off, thank you for considering contributing to ChatSync! It's people like you that make ChatSync such a great tool.
 
 ## Code of Conduct
 

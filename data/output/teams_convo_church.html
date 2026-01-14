@@ -1,0 +1,492 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Teams Conversation — Church Scenarios</title>
+  <style>
+    :root {
+      --bg: #0f172a;
+      --panel: #111827;
+      --panel-2: #0b1220;
+      --text: #e5e7eb;
+      --muted: #9ca3af;
+      --accent: #60a5fa;
+      --success: #34d399;
+      --warn: #f59e0b;
+      --danger: #f87171;
+      --chip: #1f2937;
+      --mark: #fde68a66;
+    }
+    html, body { margin: 0; padding: 0; background: var(--bg); color: var(--text); font-family: Inter, ui-sans-serif, system-ui, -apple-system, Segoe UI, Roboto, Ubuntu, Cantarell, Noto Sans, Helvetica Neue, Arial, "Apple Color Emoji", "Segoe UI Emoji"; }
+    a { color: var(--accent); text-decoration: none; }
+    a:hover { text-decoration: underline; }
+    .container { max-width: 1100px; margin: 24px auto; padding: 0 16px; }
+    header { display: flex; align-items: center; justify-content: space-between; margin-bottom: 16px; }
+    .title { font-weight: 700; font-size: 20px; letter-spacing: 0.2px; }
+    .legend { display: flex; gap: 8px; flex-wrap: wrap; }
+    .chip { background: var(--chip); border: 1px solid #243244; color: var(--muted); padding: 6px 10px; border-radius: 999px; font-size: 12px; }
+    .panel { background: linear-gradient(180deg, var(--panel), var(--panel-2)); border: 1px solid #1f2b3d; border-radius: 12px; padding: 16px; }
+    .message { display: grid; grid-template-columns: 48px 1fr; gap: 12px; padding: 14px 12px; border-radius: 10px; transition: background 0.2s ease; }
+    .message:hover { background: rgba(255,255,255,0.03); }
+    .avatar { width: 48px; height: 48px; border-radius: 8px; display: grid; place-items: center; background: #223049; color: #aac8ff; font-weight: 700; }
+    .meta { display: flex; align-items: baseline; gap: 8px; }
+    .name { font-weight: 600; }
+    .time { color: var(--muted); font-size: 12px; }
+    .content { margin-top: 4px; line-height: 1.5; }
+    .content mark { background: var(--mark); padding: 0 2px; border-radius: 3px; }
+    .attachments, .reactions { margin-top: 8px; display: flex; gap: 8px; flex-wrap: wrap; }
+    .attachment { font-size: 12px; padding: 4px 8px; background: #1b2536; border: 1px solid #243244; border-radius: 8px; }
+    .reaction { font-size: 12px; padding: 4px 8px; background: #152033; border: 1px solid #243244; border-radius: 999px; color: #b3c1d1; }
+    .replies { margin-left: 60px; border-left: 2px dashed #263347; padding-left: 16px; display: grid; gap: 8px; }
+    .section { margin-top: 16px; border-top: 1px solid #1f2b3d; padding-top: 12px; }
+    .badge { font-size: 11px; padding: 3px 8px; border-radius: 999px; border: 1px solid #243244; background: #132037; color: #b7c6d8; }
+    .badge.warn { color: #f6c76b; background: #2b220f; border-color: #3a2b12; }
+    .badge.danger { color: #f6a9a9; background: #3b1212; border-color: #4a1717; }
+    .empty { color: var(--muted); font-size: 14px; padding: 24px; text-align: center; }
+    footer { color: var(--muted); font-size: 12px; margin-top: 16px; }
+    .controls { display: flex; gap: 8px; flex-wrap: wrap; }
+    select, input[type="search"] { background: #0f1626; border: 1px solid #233148; color: var(--text); border-radius: 8px; padding: 6px 10px; }
+  </style>
+</head>
+<body>
+  <div class="container">
+    <header>
+      <div class="title">Teams Conversation — Church Scenarios</div>
+      <div class="controls">
+        <input id="search" type="search" placeholder="Search text…" />
+        <select id="scenario">
+          <option value="">All scenarios</option>
+          <option value="Support Escalation">Support Escalation</option>
+          <option value="Strategic Review">Strategic Review</option>
+          <option value="Competitive Inquiry">Competitive Inquiry</option>
+          <option value="Feature Request">Feature Request</option>
+        </select>
+      </div>
+    </header>
+
+    <div class="legend">
+      <span class="chip">Support Escalation → Identify Friction</span>
+      <span class="chip">Strategic Review → Identify Value</span>
+      <span class="chip">Competitive Inquiry → Early Warning</span>
+      <span class="chip">Feature Request → Engagement</span>
+    </div>
+
+    <div class="panel section" id="root"></div>
+
+    <footer>
+      Rendered from data/input/teams_convo_church.json · Keywords highlighted in context
+    </footer>
+  </div>
+
+  <script>
+    const KEYWORDS = [
+      // Support Escalation
+      /\bthis is the third time\b/i,
+      /\bstill not working\b/i,
+      /\bblocker\b/i,
+      /\burgent\b/i,
+      // Strategic Review
+      /\broi\b/i,
+      /\boutcome[s]?\b/i,
+      /\bbusiness goal[s]?\b/i,
+      /\bnext steps\b/i,
+      /\bbudgeting\b/i,
+      // Competitive Inquiry
+      /\bhow do you compare to\b/i,
+      /\bcontract renewal terms\b/i,
+      /\bdoes\s+[A-Za-z][\w\s-]*\s+have\b/i,
+      // Feature Request
+      /\bcan we also\b/i,
+      /\bis it possible to\b/i,
+      /\bintegration with\b/i,
+    ];
+
+    const SCENARIO_RULES = [
+      { name: 'Support Escalation', any: [/third time/i, /still not working/i, /blocker/i, /urgent/i] },
+      { name: 'Strategic Review', any: [/\broi\b/i, /business goal/i, /next steps/i, /budget/i, /outcome/i] },
+      { name: 'Competitive Inquiry', any: [/how do you compare to/i, /contract renewal terms/i, /does .* have/i] },
+      { name: 'Feature Request', any: [/can we also/i, /is it possible to/i, /integration with/i] },
+    ];
+
+    function scenarioFor(text) {
+      for (const r of SCENARIO_RULES) {
+        if (r.any.some(rx => rx.test(text))) return r.name;
+      }
+      return 'General';
+    }
+
+    function highlight(html) {
+      let out = html;
+      for (const rx of KEYWORDS) {
+        out = out.replace(rx, m => `<mark>${m}</mark>`);
+      }
+      return out;
+    }
+
+    function initials(name) {
+      return (name || '?')
+        .split(/\s+/)
+        .map(s => s[0])
+        .filter(Boolean)
+        .slice(0, 2)
+        .join('')
+        .toUpperCase();
+    }
+
+    function fmtTime(iso) {
+      try { return new Date(iso).toLocaleString(); } catch { return iso; }
+    }
+
+    function el(tag, className, html) {
+      const e = document.createElement(tag);
+      if (className) e.className = className;
+      if (html !== undefined) e.innerHTML = html;
+      return e;
+    }
+
+    function renderMessage(msg, isReply = false) {
+      const wrapper = el('div', 'message');
+
+      const name = msg?.from?.user?.displayName || 'Unknown';
+      const time = msg?.createdDateTime || '';
+      const html = msg?.body?.content || '';
+
+      const av = el('div', 'avatar', initials(name));
+      wrapper.appendChild(av);
+
+      const right = el('div');
+      const meta = el('div', 'meta');
+      const nameEl = el('div', 'name', name);
+      const timeEl = el('div', 'time', fmtTime(time));
+
+      const badgeTxt = scenarioFor(html);
+      const badge = el('span', 'badge' + (badgeTxt === 'Support Escalation' ? ' danger' : badgeTxt === 'Strategic Review' ? '' : badgeTxt === 'Competitive Inquiry' ? ' warn' : ''), badgeTxt);
+
+      meta.appendChild(nameEl);
+      meta.appendChild(badge);
+      meta.appendChild(timeEl);
+
+      const content = el('div', 'content');
+      content.innerHTML = highlight(html);
+
+      right.appendChild(meta);
+      right.appendChild(content);
+
+      const atts = Array.isArray(msg.attachments) ? msg.attachments : [];
+      if (atts.length) {
+        const attWrap = el('div', 'attachments');
+        atts.forEach(a => {
+          const t = el('span', 'attachment');
+          const name = a?.name || a?.id || 'attachment';
+          const url = a?.contentUrl;
+          t.innerHTML = url ? `<a href="${url}" target="_blank" rel="noreferrer">${name}</a>` : name;
+          attWrap.appendChild(t);
+        });
+        right.appendChild(attWrap);
+      }
+
+      const reacts = Array.isArray(msg.reactions) ? msg.reactions : [];
+      if (reacts.length) {
+        const rWrap = el('div', 'reactions');
+        reacts.forEach(r => {
+          const by = r?.user?.displayName ? ` · ${r.user.displayName}` : '';
+          rWrap.appendChild(el('span', 'reaction', `${r.reactionType || 'react'}${by}`));
+        });
+        right.appendChild(rWrap);
+      }
+
+      // Replies
+      const replies = Array.isArray(msg.replies) ? msg.replies : [];
+      if (replies.length) {
+        const replyWrap = el('div', 'replies');
+        replies.forEach(rep => replyWrap.appendChild(renderMessage(rep, true)));
+        right.appendChild(replyWrap);
+      }
+
+      wrapper.appendChild(right);
+      return wrapper;
+    }
+
+    function applyFilters(root, data) {
+      const q = document.getElementById('search').value.trim();
+      const scen = document.getElementById('scenario').value;
+
+      const normalize = (s) => s.toLowerCase();
+      const matches = (msg) => {
+        const html = msg?.body?.content || '';
+        const scenName = scenarioFor(html);
+        const textOk = !q || normalize(html).includes(normalize(q));
+        const scenOk = !scen || scenName === scen;
+        return textOk && scenOk;
+      };
+
+      root.innerHTML = '';
+      let count = 0;
+      data.forEach(m => {
+        if (matches(m)) {
+          root.appendChild(renderMessage(m));
+          count++;
+        }
+      });
+
+      if (!count) root.appendChild(el('div', 'empty', 'No messages match your filter.'));
+    }
+
+    async function main() {
+      const root = document.getElementById('root');
+
+      // Try to fetch JSON from file; if blocked (file:// CORS), fall back to embedded copy.
+      let data = null;
+      try {
+        const res = await fetch('../input/teams_convo_church.json', { cache: 'no-store' });
+        if (!res.ok) throw new Error('Fetch failed');
+        data = await res.json();
+      } catch (e) {
+        try {
+          data = JSON.parse(document.getElementById('embedded-json').textContent);
+        } catch {}
+      }
+
+      if (!Array.isArray(data)) {
+        root.innerHTML = '<div class="empty">Failed to load conversation data.</div>';
+        return;
+      }
+
+      applyFilters(root, data);
+
+      document.getElementById('search').addEventListener('input', () => applyFilters(root, data));
+      document.getElementById('scenario').addEventListener('change', () => applyFilters(root, data));
+    }
+
+    document.addEventListener('DOMContentLoaded', main);
+  </script>
+
+  <!-- Embedded JSON fallback to avoid file:// fetch issues -->
+  <script id="embedded-json" type="application/json"></script>
+  <script>
+    // Inline the JSON payload to ensure offline viewing works.
+    (function injectInlineJSON(){
+      const target = document.getElementById('embedded-json');
+      // START INLINE JSON
+      target.textContent = `[
+  {
+    "id": "CH_MSG_001",
+    "createdDateTime": "2026-01-09T08:10:00Z",
+    "from": {
+      "user": { "id": "T-USER-120", "displayName": "Mark Johnson" }
+    },
+    "body": {
+      "contentType": "html",
+      "content": "<div><b>Urgent</b>: Livestream audio is out of sync again. This is the third time this month and it's still not working after yesterday's patch. This is a <b>blocker</b> for tonight's rehearsal and Sunday service.</div>"
+    },
+    "importance": "high",
+    "reactions": [],
+    "attachments": [
+      {
+        "id": "FILE_CH_001",
+        "name": "OBS_Audio_Log_2026-01-09.txt",
+        "contentType": "reference",
+        "contentUrl": "https://sharepoint.com/sites/churchmedia/OBS_Audio_Log_2026-01-09.txt"
+      },
+      {
+        "id": "FILE_CH_002",
+        "name": "Stagebox_Config.json",
+        "contentType": "reference",
+        "contentUrl": "https://sharepoint.com/sites/churchmedia/Stagebox_Config.json"
+      }
+    ],
+    "replies": [
+      {
+        "id": "CH_MSG_001_R1",
+        "replyToId": "CH_MSG_001",
+        "createdDateTime": "2026-01-09T08:22:30Z",
+        "from": {
+          "user": { "id": "T-USER-301", "displayName": "Nina Patel (Support)" }
+        },
+        "body": {
+          "contentType": "html",
+          "content": "<div>Thanks Mark. Reviewing the logs now. Can you confirm if the USB audio interface firmware is v2.4? If not, this could be the root cause of the <i>desync</i>.</div>"
+        },
+        "attachments": [],
+        "reactions": []
+      },
+      {
+        "id": "CH_MSG_001_R2",
+        "replyToId": "CH_MSG_001",
+        "createdDateTime": "2026-01-09T08:35:10Z",
+        "from": {
+          "user": { "id": "T-USER-120", "displayName": "Mark Johnson" }
+        },
+        "body": {
+          "contentType": "html",
+          "content": "<div>Firmware is v2.3. Updating now. But this is a <b>blocker</b> if the update doesn't resolve it — we need a workaround by noon.</div>"
+        },
+        "attachments": [],
+        "reactions": []
+      },
+      {
+        "id": "CH_MSG_001_R3",
+        "replyToId": "CH_MSG_001",
+        "createdDateTime": "2026-01-09T09:05:00Z",
+        "from": {
+          "user": { "id": "T-USER-301", "displayName": "Nina Patel (Support)" }
+        },
+        "body": {
+          "contentType": "html",
+          "content": "<div>Confirmed — v2.4 resolves known clock drift. As a failsafe, set OBS Audio Sync Offset to 250ms. We'll push a hotfix later today. Marking this as <b>Urgent</b> on our queue.</div>"
+        },
+        "attachments": [],
+        "reactions": []
+      }
+    ]
+  },
+  {
+    "id": "CH_MSG_002",
+    "createdDateTime": "2026-01-09T10:00:00Z",
+    "from": {
+      "user": { "id": "T-USER-150", "displayName": "Emily Carter" }
+    },
+    "body": {
+      "contentType": "html",
+      "content": "<div>Quarterly Strategic Review (Q1): Aligning on <b>business goals</b> for online ministry. Discussion topics: <br/>• <b>ROI</b> from livestream upgrades<br/>• <b>Outcomes</b> (attendance, engagement, prayer requests)<br/>• <b>Budgeting</b> for camera refresh<br/>• <b>Next steps</b> to scale small groups online</div>"
+    },
+    "importance": "high",
+    "reactions": [],
+    "attachments": [
+      {
+        "id": "FILE_CH_003",
+        "name": "Q1_Ministry_Outcomes_Review.pdf",
+        "contentType": "reference",
+        "contentUrl": "https://sharepoint.com/sites/churchops/Q1_Ministry_Outcomes_Review.pdf"
+      }
+    ],
+    "replies": [
+      {
+        "id": "CH_MSG_002_R1",
+        "replyToId": "CH_MSG_002",
+        "createdDateTime": "2026-01-09T10:18:15Z",
+        "from": {
+          "user": { "id": "T-USER-160", "displayName": "David Lee" }
+        },
+        "body": {
+          "contentType": "html",
+          "content": "<div>Finance perspective: The projected <b>ROI</b> on the new cameras is 14–18% within 12 months if we sustain current viewership growth. <b>Budgeting</b> can accommodate two units this quarter.</div>"
+        },
+        "attachments": [],
+        "reactions": []
+      },
+      {
+        "id": "CH_MSG_002_R2",
+        "replyToId": "CH_MSG_002",
+        "createdDateTime": "2026-01-09T10:32:40Z",
+        "from": {
+          "user": { "id": "T-USER-120", "displayName": "Mark Johnson" }
+        },
+        "body": {
+          "contentType": "html",
+          "content": "<div>Proposed <b>next steps</b>: 1) Pilot camera A in the chapel next week, 2) Measure outcome metrics (drop-off, AV sync, prayer submissions), 3) Decide by Feb 1. Expected <b>outcome</b>: 20%% reduction in post-production time.</div>"
+        },
+        "attachments": [],
+        "reactions": [
+          { "reactionType": "like", "user": { "id": "T-USER-150", "displayName": "Emily Carter" } }
+        ]
+      }
+    ]
+  },
+  {
+    "id": "CH_MSG_003",
+    "createdDateTime": "2026-01-09T12:30:00Z",
+    "from": {
+      "user": { "id": "T-USER-175", "displayName": "Ava Brown" }
+    },
+    "body": {
+      "contentType": "html",
+      "content": "<div>Quick question for planning: How do you compare to Planning Center Live for service flow? Does ChurchSuite have real-time lyrics sync? Also, where do we check our <b>contract renewal terms</b>?</div>"
+    },
+    "importance": "normal",
+    "reactions": [],
+    "attachments": [],
+    "replies": [
+      {
+        "id": "CH_MSG_003_R1",
+        "replyToId": "CH_MSG_003",
+        "createdDateTime": "2026-01-09T12:44:20Z",
+        "from": {
+          "user": { "id": "T-USER-44", "displayName": "Dave Miller" }
+        },
+        "body": {
+          "contentType": "html",
+          "content": "<div>Great questions. Compared to <b>Planning Center Live</b>, we support scene presets and MIDI triggers; lyrics sync is in beta (ChurchSuite offers basic sync, not MIDI). Your <b>contract renewal terms</b> are net-30 with a 10%% early renewal discount. I can send the doc.</div>"
+        },
+        "attachments": [
+          {
+            "id": "FILE_CH_004",
+            "name": "Renewal_Terms_2026.pdf",
+            "contentType": "reference",
+            "contentUrl": "https://sharepoint.com/sites/churchops/Renewal_Terms_2026.pdf"
+          }
+        ],
+        "reactions": []
+      }
+    ]
+  },
+  {
+    "id": "CH_MSG_004",
+    "createdDateTime": "2026-01-09T15:45:00Z",
+    "from": {
+      "user": { "id": "T-USER-210", "displayName": "Maria Gomez" }
+    },
+    "body": {
+      "contentType": "html",
+      "content": "<div>Feature request for outreach: Can we also schedule volunteer reminders via SMS? Is it possible to add <b>integration with</b> Mailchimp and Planning Center Groups so new visitor follow-ups are automatic?</div>"
+    },
+    "importance": "normal",
+    "reactions": [],
+    "attachments": [
+      {
+        "id": "FILE_CH_005",
+        "name": "Visitor_Followup_Sample.csv",
+        "contentType": "reference",
+        "contentUrl": "https://sharepoint.com/sites/outreach/Visitor_Followup_Sample.csv"
+      }
+    ],
+    "replies": [
+      {
+        "id": "CH_MSG_004_R1",
+        "replyToId": "CH_MSG_004",
+        "createdDateTime": "2026-01-09T16:02:10Z",
+        "from": {
+          "user": { "id": "T-USER-120", "displayName": "Mark Johnson" }
+        },
+        "body": {
+          "contentType": "html",
+          "content": "<div>Yes — SMS reminders are on our roadmap. <b>Integration with</b> Mailchimp can be done via webhook today; Planning Center Groups integration would need an API key from Ops.</div>"
+        },
+        "attachments": [],
+        "reactions": []
+      },
+      {
+        "id": "CH_MSG_004_R2",
+        "replyToId": "CH_MSG_004",
+        "createdDateTime": "2026-01-09T16:20:35Z",
+        "from": {
+          "user": { "id": "T-USER-77", "displayName": "Elena Rodriguez" }
+        },
+        "body": {
+          "contentType": "html",
+          "content": "<div>We can prototype this next sprint. If approved, GA by March 15. Please share any consent requirements for SMS.</div>"
+        },
+        "attachments": [],
+        "reactions": [
+          { "reactionType": "like", "user": { "id": "T-USER-210", "displayName": "Maria Gomez" } }
+        ]
+      }
+    ]
+  }
+]`;
+      // END INLINE JSON
+    })();
+  </script>
+</body>
+</html>

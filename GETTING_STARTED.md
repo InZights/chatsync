@@ -1,6 +1,6 @@
-# Getting Started with ConvoHub
+# Getting Started with ChatSync
 
-Welcome to ConvoHub! This guide will help you set up and run your first conversation migration in under 10 minutes.
+Welcome to ChatSync! This guide will help you set up and run your first conversation migration in under 10 minutes.
 
 ## 🎯 What You'll Achieve
 
@@ -25,8 +25,8 @@ Before you begin, ensure you have:
 ### Step 1: Clone the Repository
 
 ```bash
-git clone https://github.com/yourusername/convohub.git
-cd convohub
+git clone https://github.com/yourusername/chatsync.git
+cd chatsync
 ```
 
 ### Step 2: Install Dependencies

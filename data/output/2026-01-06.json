@@ -1,0 +1,179 @@
+[
+  {
+    "type": "message",
+    "user": "U_UNKNOWN_dba6775d",
+    "text": "Infrastructure update: All staging servers are now running on the new _Kubernetes cluster_. Performance metrics look solid.",
+    "ts": "1767686400.000000",
+    "team": "T001BRYD",
+    "replace_original": false,
+    "metadata": {
+      "event_type": "migration_source",
+      "event_payload": {
+        "teams_id": "MSG_004",
+        "teams_user_id": "T-USER-22",
+        "migration_timestamp": "2026-01-09T00:44:38.151235"
+      }
+    },
+    "files": [
+      {
+        "title": "K8s_Performance_Report.pdf",
+        "url": "https://sharepoint.com/sites/devops/K8s_Performance_Report.pdf",
+        "teams_ref_id": "FILE_005"
+      }
+    ]
+  },
+  {
+    "type": "message",
+    "user": "U_UNKNOWN_134e0d9a",
+    "text": "Great! What about the database migration? Any issues with the replication lag?",
+    "ts": "1767689122.000000",
+    "team": "T001BRYD",
+    "replace_original": false,
+    "metadata": {
+      "event_type": "migration_source",
+      "event_payload": {
+        "teams_id": "MSG_004_R1",
+        "teams_user_id": "T-USER-55",
+        "migration_timestamp": "2026-01-09T00:44:38.151263"
+      }
+    },
+    "thread_ts": "1767686400.000000",
+    "parent_user_id": "U_UNKNOWN_dba6775d"
+  },
+  {
+    "type": "message",
+    "user": "U_UNKNOWN_dba6775d",
+    "text": "Lag is *<100ms* which is within acceptable limits. We're monitoring closely. Next phase: production failover testing scheduled for next week.",
+    "ts": "1767691210.000000",
+    "team": "T001BRYD",
+    "replace_original": false,
+    "metadata": {
+      "event_type": "migration_source",
+      "event_payload": {
+        "teams_id": "MSG_004_R2",
+        "teams_user_id": "T-USER-22",
+        "migration_timestamp": "2026-01-09T00:44:38.151294"
+      }
+    },
+    "thread_ts": "1767686400.000000",
+    "parent_user_id": "U_UNKNOWN_dba6775d"
+  },
+  {
+    "type": "message",
+    "user": "U_UNKNOWN_134e0d9a",
+    "text": "Security audit results are in. We passed all critical items but have 3 *medium priority* findings to address. Full report attached.",
+    "ts": "1767694500.000000",
+    "team": "T001BRYD",
+    "replace_original": false,
+    "metadata": {
+      "event_type": "migration_source",
+      "event_payload": {
+        "teams_id": "MSG_005",
+        "teams_user_id": "T-USER-55",
+        "migration_timestamp": "2026-01-09T00:44:38.151324"
+      }
+    },
+    "files": [
+      {
+        "title": "Security_Audit_Report_2026.pdf",
+        "url": "https://sharepoint.com/sites/security/Security_Audit_Report_2026.pdf",
+        "teams_ref_id": "FILE_006"
+      }
+    ]
+  },
+  {
+    "type": "message",
+    "user": "U_UNKNOWN_dba6775d",
+    "text": "Good news! What are the remediation timelines? Can we get them resolved before the Global Tech onboarding?",
+    "ts": "1767696645.000000",
+    "team": "T001BRYD",
+    "replace_original": false,
+    "metadata": {
+      "event_type": "migration_source",
+      "event_payload": {
+        "teams_id": "MSG_005_R1",
+        "teams_user_id": "T-USER-22",
+        "migration_timestamp": "2026-01-09T00:44:38.151350"
+      }
+    },
+    "thread_ts": "1767694500.000000",
+    "parent_user_id": "U_UNKNOWN_134e0d9a"
+  },
+  {
+    "type": "message",
+    "user": "U_UNKNOWN_134e0d9a",
+    "text": "Yes, all 3 items will be resolved by *Jan 15th*. That gives us 2 weeks buffer before the Global Tech deployment.",
+    "ts": "1767698730.000000",
+    "team": "T001BRYD",
+    "replace_original": false,
+    "metadata": {
+      "event_type": "migration_source",
+      "event_payload": {
+        "teams_id": "MSG_005_R2",
+        "teams_user_id": "T-USER-55",
+        "migration_timestamp": "2026-01-09T00:44:38.151378"
+      }
+    },
+    "thread_ts": "1767694500.000000",
+    "parent_user_id": "U_UNKNOWN_134e0d9a"
+  },
+  {
+    "type": "message",
+    "user": "U_UNKNOWN_08916548",
+    "text": "Customer support metrics for December: \n*Avg response time: 2.3 hours*\n*Customer satisfaction: 92%*\n*Ticket volume: 1,247*",
+    "ts": "1767707100.000000",
+    "team": "T001BRYD",
+    "replace_original": false,
+    "metadata": {
+      "event_type": "migration_source",
+      "event_payload": {
+        "teams_id": "MSG_006",
+        "teams_user_id": "T-USER-11",
+        "migration_timestamp": "2026-01-09T00:44:38.151406"
+      }
+    },
+    "files": [
+      {
+        "title": "Support_Metrics_December_2025.csv",
+        "url": "https://sharepoint.com/sites/support/Support_Metrics_December_2025.csv",
+        "teams_ref_id": "FILE_007"
+      }
+    ]
+  },
+  {
+    "type": "message",
+    "user": "U01ABC",
+    "text": "Excellent results James! The 92% satisfaction is our best result yet. Are we seeing any trending issues?",
+    "ts": "1767708922.000000",
+    "team": "T001BRYD",
+    "replace_original": false,
+    "metadata": {
+      "event_type": "migration_source",
+      "event_payload": {
+        "teams_id": "MSG_006_R1",
+        "teams_user_id": "T-USER-99",
+        "migration_timestamp": "2026-01-09T00:44:38.151440"
+      }
+    },
+    "thread_ts": "1767707100.000000",
+    "parent_user_id": "U_UNKNOWN_08916548"
+  },
+  {
+    "type": "message",
+    "user": "U_UNKNOWN_08916548",
+    "text": "Yes, two main trends:\n1. *API documentation* - 18% of tickets\n2. *Performance tuning* - 12% of tickets\nI recommend we prioritize these in the roadmap.",
+    "ts": "1767711000.000000",
+    "team": "T001BRYD",
+    "replace_original": false,
+    "metadata": {
+      "event_type": "migration_source",
+      "event_payload": {
+        "teams_id": "MSG_006_R2",
+        "teams_user_id": "T-USER-11",
+        "migration_timestamp": "2026-01-09T00:44:38.151467"
+      }
+    },
+    "thread_ts": "1767707100.000000",
+    "parent_user_id": "U_UNKNOWN_08916548"
+  }
+]

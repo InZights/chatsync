@@ -1,4 +1,4 @@
-# 🗂️ ConvoHub - Project Index
+# 🗂️ ChatSync - Project Index
 
 **Start here:** [README.md](README.md) | **Quick Setup:** [Quick Start](#-quick-start)
 
@@ -63,7 +63,7 @@
 ## 📂 Directory Structure
 
 ```
-convohub/
+chatsync/
 ├── 📄 README.md                    # Main documentation ⭐
 ├── 📄 LICENSE                      # MIT License
 ├── 📄 CONTRIBUTING.md              # Contribution guidelines
@@ -235,7 +235,7 @@ pytest tests/integration/
 
 ---
 
-**Made with ❤️ by the ConvoHub Team**
+**Made with ❤️ by the ChatSync Team**
 
 *Last Updated: January 15, 2026*
 - Sample Microsoft Teams export
