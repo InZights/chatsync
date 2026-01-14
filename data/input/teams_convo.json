@@ -1,0 +1,529 @@
+[
+  {
+    "id": "MSG_001",
+    "createdDateTime": "2026-01-05T09:15:00Z",
+    "from": {
+      "user": { "id": "T-USER-99", "displayName": "Sarah Jenkins" }
+    },
+    "body": {
+      "contentType": "html",
+      "content": "<div>Good morning team! 📊 Let's kick off the Q1 planning session. I've prepared the initial budget forecast for discussion.</div>"
+    },
+    "importance": "high",
+    "reactions": [],
+    "attachments": [
+      {
+        "id": "FILE_001",
+        "name": "Q1_Budget_Forecast_2026.xlsx",
+        "contentType": "reference",
+        "contentUrl": "https://sharepoint.com/sites/planning/Q1_Budget_Forecast_2026.xlsx"
+      }
+    ],
+    "replies": [
+      {
+        "id": "MSG_001_R1",
+        "replyToId": "MSG_001",
+        "createdDateTime": "2026-01-05T09:32:15Z",
+        "from": {
+          "user": { "id": "T-USER-44", "displayName": "Dave Miller" }
+        },
+        "body": {
+          "contentType": "html",
+          "content": "<div>Thanks Sarah! I reviewed it. The engineering allocation looks good, but I'd like to discuss the <b>marketing budget</b> increase.</div>"
+        },
+        "attachments": [],
+        "reactions": []
+      },
+      {
+        "id": "MSG_001_R2",
+        "replyToId": "MSG_001",
+        "createdDateTime": "2026-01-05T10:05:42Z",
+        "from": {
+          "user": { "id": "T-USER-77", "displayName": "Elena Rodriguez" }
+        },
+        "body": {
+          "contentType": "html",
+          "content": "<div>I agree with Dave. The 20% increase is justified given our new product launch timeline. Here's the detailed ROI analysis: <br/><b>Expected revenue impact: +$2.3M</b></div>"
+        },
+        "attachments": [
+          {
+            "id": "FILE_002",
+            "name": "Marketing_ROI_Analysis.pdf",
+            "contentType": "reference",
+            "contentUrl": "https://sharepoint.com/sites/planning/Marketing_ROI_Analysis.pdf"
+          }
+        ],
+        "reactions": [
+          { "reactionType": "like", "user": { "id": "T-USER-99", "displayName": "Sarah Jenkins" } },
+          { "reactionType": "like", "user": { "id": "T-USER-44", "displayName": "Dave Miller" } }
+        ]
+      }
+    ]
+  },
+  {
+    "id": "MSG_002",
+    "createdDateTime": "2026-01-05T11:20:30Z",
+    "from": {
+      "user": { "id": "T-USER-44", "displayName": "Dave Miller" }
+    },
+    "body": {
+      "contentType": "html",
+      "content": "<div>FYI team - the @Global Tech client contract is <i>under review</i>. Legal expects sign-off by EOW.</div>"
+    },
+    "importance": "normal",
+    "reactions": [],
+    "attachments": [],
+    "replies": [
+      {
+        "id": "MSG_002_R1",
+        "replyToId": "MSG_002",
+        "createdDateTime": "2026-01-05T11:45:00Z",
+        "from": {
+          "user": { "id": "T-USER-22", "displayName": "Michael Chen" }
+        },
+        "body": {
+          "contentType": "html",
+          "content": "<div>Great! That's ahead of schedule. Should we start provisioning the infrastructure?</div>"
+        },
+        "attachments": [],
+        "reactions": []
+      },
+      {
+        "id": "MSG_002_R2",
+        "replyToId": "MSG_002",
+        "createdDateTime": "2026-01-05T12:15:22Z",
+        "from": {
+          "user": { "id": "T-USER-44", "displayName": "Dave Miller" }
+        },
+        "body": {
+          "contentType": "html",
+          "content": "<div>Yes, good idea. Michael, can you coordinate with DevOps? I'll send you the technical requirements doc.</div>"
+        },
+        "attachments": [
+          {
+            "id": "FILE_003",
+            "name": "GlobalTech_TechSpecs.docx",
+            "contentType": "reference",
+            "contentUrl": "https://sharepoint.com/sites/clients/GlobalTech_TechSpecs.docx"
+          }
+        ],
+        "reactions": []
+      }
+    ]
+  },
+  {
+    "id": "MSG_003",
+    "createdDateTime": "2026-01-05T14:30:00Z",
+    "from": {
+      "user": { "id": "T-USER-77", "displayName": "Elena Rodriguez" }
+    },
+    "body": {
+      "contentType": "html",
+      "content": "<div>🎯 Product roadmap v2.1 is ready for review. Key changes: <br/><b>✓ New analytics dashboard</b><br/><b>✓ Mobile app improvements</b><br/><b>✓ API rate limit increases</b></div>"
+    },
+    "importance": "high",
+    "reactions": [],
+    "attachments": [
+      {
+        "id": "FILE_004",
+        "name": "Product_Roadmap_2026.pptx",
+        "contentType": "reference",
+        "contentUrl": "https://sharepoint.com/sites/product/Product_Roadmap_2026.pptx"
+      }
+    ],
+    "replies": [
+      {
+        "id": "MSG_003_R1",
+        "replyToId": "MSG_003",
+        "createdDateTime": "2026-01-05T15:05:33Z",
+        "from": {
+          "user": { "id": "T-USER-99", "displayName": "Sarah Jenkins" }
+        },
+        "body": {
+          "contentType": "html",
+          "content": "<div>Excellent work Elena! The timeline looks aggressive. When can we demo the analytics dashboard to stakeholders?</div>"
+        },
+        "attachments": [],
+        "reactions": [
+          { "reactionType": "love", "user": { "id": "T-USER-77", "displayName": "Elena Rodriguez" } }
+        ]
+      },
+      {
+        "id": "MSG_003_R2",
+        "replyToId": "MSG_003",
+        "createdDateTime": "2026-01-05T15:40:15Z",
+        "from": {
+          "user": { "id": "T-USER-77", "displayName": "Elena Rodriguez" }
+        },
+        "body": {
+          "contentType": "html",
+          "content": "<div>We can have a <b>live demo ready by Jan 20th</b>. I'm coordinating with QA to ensure the analytics data is accurate. Should I schedule the stakeholder meeting?</div>"
+        },
+        "attachments": [],
+        "reactions": []
+      }
+    ]
+  },
+  {
+    "id": "MSG_004",
+    "createdDateTime": "2026-01-06T08:00:00Z",
+    "from": {
+      "user": { "id": "T-USER-22", "displayName": "Michael Chen" }
+    },
+    "body": {
+      "contentType": "html",
+      "content": "<div>Infrastructure update: All staging servers are now running on the new <i>Kubernetes cluster</i>. Performance metrics look solid.</div>"
+    },
+    "importance": "normal",
+    "reactions": [],
+    "attachments": [
+      {
+        "id": "FILE_005",
+        "name": "K8s_Performance_Report.pdf",
+        "contentType": "reference",
+        "contentUrl": "https://sharepoint.com/sites/devops/K8s_Performance_Report.pdf"
+      }
+    ],
+    "replies": [
+      {
+        "id": "MSG_004_R1",
+        "replyToId": "MSG_004",
+        "createdDateTime": "2026-01-06T08:45:22Z",
+        "from": {
+          "user": { "id": "T-USER-55", "displayName": "Lisa Park" }
+        },
+        "body": {
+          "contentType": "html",
+          "content": "<div>Great! What about the database migration? Any issues with the replication lag?</div>"
+        },
+        "attachments": [],
+        "reactions": []
+      },
+      {
+        "id": "MSG_004_R2",
+        "replyToId": "MSG_004",
+        "createdDateTime": "2026-01-06T09:20:10Z",
+        "from": {
+          "user": { "id": "T-USER-22", "displayName": "Michael Chen" }
+        },
+        "body": {
+          "contentType": "html",
+          "content": "<div>Lag is <b>&lt;100ms</b> which is within acceptable limits. We're monitoring closely. Next phase: production failover testing scheduled for next week.</div>"
+        },
+        "attachments": [],
+        "reactions": [
+          { "reactionType": "like", "user": { "id": "T-USER-55", "displayName": "Lisa Park" } }
+        ]
+      }
+    ]
+  },
+  {
+    "id": "MSG_005",
+    "createdDateTime": "2026-01-06T10:15:00Z",
+    "from": {
+      "user": { "id": "T-USER-55", "displayName": "Lisa Park" }
+    },
+    "body": {
+      "contentType": "html",
+      "content": "<div>Security audit results are in. We passed all critical items but have 3 <b>medium priority</b> findings to address. Full report attached.</div>"
+    },
+    "importance": "high",
+    "reactions": [],
+    "attachments": [
+      {
+        "id": "FILE_006",
+        "name": "Security_Audit_Report_2026.pdf",
+        "contentType": "reference",
+        "contentUrl": "https://sharepoint.com/sites/security/Security_Audit_Report_2026.pdf"
+      }
+    ],
+    "replies": [
+      {
+        "id": "MSG_005_R1",
+        "replyToId": "MSG_005",
+        "createdDateTime": "2026-01-06T10:50:45Z",
+        "from": {
+          "user": { "id": "T-USER-22", "displayName": "Michael Chen" }
+        },
+        "body": {
+          "contentType": "html",
+          "content": "<div>Good news! What are the remediation timelines? Can we get them resolved before the Global Tech onboarding?</div>"
+        },
+        "attachments": [],
+        "reactions": []
+      },
+      {
+        "id": "MSG_005_R2",
+        "replyToId": "MSG_005",
+        "createdDateTime": "2026-01-06T11:25:30Z",
+        "from": {
+          "user": { "id": "T-USER-55", "displayName": "Lisa Park" }
+        },
+        "body": {
+          "contentType": "html",
+          "content": "<div>Yes, all 3 items will be resolved by <b>Jan 15th</b>. That gives us 2 weeks buffer before the Global Tech deployment.</div>"
+        },
+        "attachments": [],
+        "reactions": []
+      }
+    ]
+  },
+  {
+    "id": "MSG_006",
+    "createdDateTime": "2026-01-06T13:45:00Z",
+    "from": {
+      "user": { "id": "T-USER-11", "displayName": "James Wilson" }
+    },
+    "body": {
+      "contentType": "html",
+      "content": "<div>Customer support metrics for December: <br/><b>Avg response time: 2.3 hours</b><br/><b>Customer satisfaction: 92%</b><br/><b>Ticket volume: 1,247</b></div>"
+    },
+    "importance": "normal",
+    "reactions": [],
+    "attachments": [
+      {
+        "id": "FILE_007",
+        "name": "Support_Metrics_December_2025.csv",
+        "contentType": "reference",
+        "contentUrl": "https://sharepoint.com/sites/support/Support_Metrics_December_2025.csv"
+      }
+    ],
+    "replies": [
+      {
+        "id": "MSG_006_R1",
+        "replyToId": "MSG_006",
+        "createdDateTime": "2026-01-06T14:15:22Z",
+        "from": {
+          "user": { "id": "T-USER-99", "displayName": "Sarah Jenkins" }
+        },
+        "body": {
+          "contentType": "html",
+          "content": "<div>Excellent results James! The 92% satisfaction is our best result yet. Are we seeing any trending issues?</div>"
+        },
+        "attachments": [],
+        "reactions": []
+      },
+      {
+        "id": "MSG_006_R2",
+        "replyToId": "MSG_006",
+        "createdDateTime": "2026-01-06T14:50:00Z",
+        "from": {
+          "user": { "id": "T-USER-11", "displayName": "James Wilson" }
+        },
+        "body": {
+          "contentType": "html",
+          "content": "<div>Yes, two main trends:<br/>1. <b>API documentation</b> - 18% of tickets<br/>2. <b>Performance tuning</b> - 12% of tickets<br/>I recommend we prioritize these in the roadmap.</div>"
+        },
+        "attachments": [],
+        "reactions": [
+          { "reactionType": "like", "user": { "id": "T-USER-99", "displayName": "Sarah Jenkins" } },
+          { "reactionType": "like", "user": { "id": "T-USER-77", "displayName": "Elena Rodriguez" } }
+        ]
+      }
+    ]
+  },
+  {
+    "id": "MSG_007",
+    "createdDateTime": "2026-01-07T09:00:00Z",
+    "from": {
+      "user": { "id": "T-USER-77", "displayName": "Elena Rodriguez" }
+    },
+    "body": {
+      "contentType": "html",
+      "content": "<div>Team announcement: We're launching the <b>Developer Partner Program</b> starting Feb 1st! Looking for volunteers to help build the onboarding docs. 🚀</div>"
+    },
+    "importance": "high",
+    "reactions": [
+      { "reactionType": "love", "user": { "id": "T-USER-99", "displayName": "Sarah Jenkins" } },
+      { "reactionType": "like", "user": { "id": "T-USER-44", "displayName": "Dave Miller" } }
+    ],
+    "attachments": [],
+    "replies": [
+      {
+        "id": "MSG_007_R1",
+        "replyToId": "MSG_007",
+        "createdDateTime": "2026-01-07T09:30:15Z",
+        "from": {
+          "user": { "id": "T-USER-22", "displayName": "Michael Chen" }
+        },
+        "body": {
+          "contentType": "html",
+          "content": "<div>Count me in! I can help with the API documentation section.</div>"
+        },
+        "attachments": [],
+        "reactions": []
+      },
+      {
+        "id": "MSG_007_R2",
+        "replyToId": "MSG_007",
+        "createdDateTime": "2026-01-07T09:45:22Z",
+        "from": {
+          "user": { "id": "T-USER-11", "displayName": "James Wilson" }
+        },
+        "body": {
+          "contentType": "html",
+          "content": "<div>I'll handle the getting-started guide and sample code examples.</div>"
+        },
+        "attachments": [],
+        "reactions": []
+      },
+      {
+        "id": "MSG_007_R3",
+        "replyToId": "MSG_007",
+        "createdDateTime": "2026-01-07T10:00:00Z",
+        "from": {
+          "user": { "id": "T-USER-55", "displayName": "Lisa Park" }
+        },
+        "body": {
+          "contentType": "html",
+          "content": "<div>I can support with security best practices documentation.</div>"
+        },
+        "attachments": [],
+        "reactions": []
+      }
+    ]
+  },
+  {
+    "id": "MSG_008",
+    "createdDateTime": "2026-01-07T14:20:00Z",
+    "from": {
+      "user": { "id": "T-USER-44", "displayName": "Dave Miller" }
+    },
+    "body": {
+      "contentType": "html",
+      "content": "<div>Quick sync on the <b>Global Tech</b> deal status: Contract signed! 🎉 Moving to implementation phase. Kickoff meeting scheduled for Jan 10th.</div>"
+    },
+    "importance": "high",
+    "reactions": [
+      { "reactionType": "love", "user": { "id": "T-USER-99", "displayName": "Sarah Jenkins" } },
+      { "reactionType": "like", "user": { "id": "T-USER-77", "displayName": "Elena Rodriguez" } },
+      { "reactionType": "like", "user": { "id": "T-USER-44", "displayName": "Dave Miller" } }
+    ],
+    "attachments": [
+      {
+        "id": "FILE_008",
+        "name": "GlobalTech_ExecutedContract.pdf",
+        "contentType": "reference",
+        "contentUrl": "https://sharepoint.com/sites/contracts/GlobalTech_ExecutedContract.pdf"
+      }
+    ],
+    "replies": [
+      {
+        "id": "MSG_008_R1",
+        "replyToId": "MSG_008",
+        "createdDateTime": "2026-01-07T14:45:30Z",
+        "from": {
+          "user": { "id": "T-USER-22", "displayName": "Michael Chen" }
+        },
+        "body": {
+          "contentType": "html",
+          "content": "<div>Excellent! I'll make sure the infrastructure is ready for the kickoff. What's the deployment timeline?</div>"
+        },
+        "attachments": [],
+        "reactions": []
+      },
+      {
+        "id": "MSG_008_R2",
+        "replyToId": "MSG_008",
+        "createdDateTime": "2026-01-07T15:10:45Z",
+        "from": {
+          "user": { "id": "T-USER-44", "displayName": "Dave Miller" }
+        },
+        "body": {
+          "contentType": "html",
+          "content": "<div>Go-live target is <b>Feb 28th</b>. That gives us 7 weeks to implement. I'll send the detailed project plan tomorrow.</div>"
+        },
+        "attachments": [],
+        "reactions": []
+      }
+    ]
+  },
+  {
+    "id": "MSG_009",
+    "createdDateTime": "2026-01-08T08:30:00Z",
+    "from": {
+      "user": { "id": "T-USER-99", "displayName": "Sarah Jenkins" }
+    },
+    "body": {
+      "contentType": "html",
+      "content": "<div>Weekly all-hands summary: <br/><b>✓ Revenue on track</b> (+12% vs last quarter)<br/><b>✓ New partnerships signed</b> (3 total)<br/><b>→ Hiring plan</b> adjusted for 2026</div>"
+    },
+    "importance": "high",
+    "reactions": [],
+    "attachments": [
+      {
+        "id": "FILE_009",
+        "name": "Weekly_Summary_Jan_8_2026.pptx",
+        "contentType": "reference",
+        "contentUrl": "https://sharepoint.com/sites/leadership/Weekly_Summary_Jan_8_2026.pptx"
+      }
+    ],
+    "replies": [
+      {
+        "id": "MSG_009_R1",
+        "replyToId": "MSG_009",
+        "createdDateTime": "2026-01-08T09:00:22Z",
+        "from": {
+          "user": { "id": "T-USER-77", "displayName": "Elena Rodriguez" }
+        },
+        "body": {
+          "contentType": "html",
+          "content": "<div>Great numbers! The revenue growth is exactly what we projected. Should we accelerate the product roadmap timeline?</div>"
+        },
+        "attachments": [],
+        "reactions": []
+      },
+      {
+        "id": "MSG_009_R2",
+        "replyToId": "MSG_009",
+        "createdDateTime": "2026-01-08T09:35:00Z",
+        "from": {
+          "user": { "id": "T-USER-99", "displayName": "Sarah Jenkins" }
+        },
+        "body": {
+          "contentType": "html",
+          "content": "<div>Yes, let's look at parallel development tracks. Elena, can you identify which features we can accelerate without impacting quality?</div>"
+        },
+        "attachments": [],
+        "reactions": []
+      }
+    ]
+  },
+  {
+    "id": "MSG_010",
+    "createdDateTime": "2026-01-08T11:00:00Z",
+    "from": {
+      "user": { "id": "T-USER-11", "displayName": "James Wilson" }
+    },
+    "body": {
+      "contentType": "html",
+      "content": "<div>FYI: We're deprecating the <i>v1 REST API</i> in June 2026. Migration guide is ready. All customers have been notified. Transition period: 6 months.</div>"
+    },
+    "importance": "high",
+    "reactions": [],
+    "attachments": [
+      {
+        "id": "FILE_010",
+        "name": "API_v1_Deprecation_Guide.pdf",
+        "contentType": "reference",
+        "contentUrl": "https://sharepoint.com/sites/product/API_v1_Deprecation_Guide.pdf"
+      }
+    ],
+    "replies": [
+      {
+        "id": "MSG_010_R1",
+        "replyToId": "MSG_010",
+        "createdDateTime": "2026-01-08T11:30:15Z",
+        "from": {
+          "user": { "id": "T-USER-22", "displayName": "Michael Chen" }
+        },
+        "body": {
+          "contentType": "html",
+          "content": "<div>Good timing. The v2 API adoption is already at 78%. This 6-month window should be sufficient for the remaining users to migrate.</div>"
+        },
+        "attachments": [],
+        "reactions": []
+      }
+    ]
+  }
+]

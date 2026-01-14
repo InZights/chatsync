@@ -1,0 +1,216 @@
+[
+  {
+    "id": "CH_MSG_001",
+    "createdDateTime": "2026-01-09T08:10:00Z",
+    "from": {
+      "user": { "id": "T-USER-120", "displayName": "Mark Johnson" }
+    },
+    "body": {
+      "contentType": "html",
+      "content": "<div><b>Urgent</b>: Livestream audio is out of sync again. This is the third time this month and it's still not working after yesterday's patch. This is a <b>blocker</b> for tonight's rehearsal and Sunday service.</div>"
+    },
+    "importance": "high",
+    "reactions": [],
+    "attachments": [
+      {
+        "id": "FILE_CH_001",
+        "name": "OBS_Audio_Log_2026-01-09.txt",
+        "contentType": "reference",
+        "contentUrl": "https://sharepoint.com/sites/churchmedia/OBS_Audio_Log_2026-01-09.txt"
+      },
+      {
+        "id": "FILE_CH_002",
+        "name": "Stagebox_Config.json",
+        "contentType": "reference",
+        "contentUrl": "https://sharepoint.com/sites/churchmedia/Stagebox_Config.json"
+      }
+    ],
+    "replies": [
+      {
+        "id": "CH_MSG_001_R1",
+        "replyToId": "CH_MSG_001",
+        "createdDateTime": "2026-01-09T08:22:30Z",
+        "from": {
+          "user": { "id": "T-USER-301", "displayName": "Nina Patel (Support)" }
+        },
+        "body": {
+          "contentType": "html",
+          "content": "<div>Thanks Mark. Reviewing the logs now. Can you confirm if the USB audio interface firmware is v2.4? If not, this could be the root cause of the <i>desync</i>.</div>"
+        },
+        "attachments": [],
+        "reactions": []
+      },
+      {
+        "id": "CH_MSG_001_R2",
+        "replyToId": "CH_MSG_001",
+        "createdDateTime": "2026-01-09T08:35:10Z",
+        "from": {
+          "user": { "id": "T-USER-120", "displayName": "Mark Johnson" }
+        },
+        "body": {
+          "contentType": "html",
+          "content": "<div>Firmware is v2.3. Updating now. But this is a <b>blocker</b> if the update doesn't resolve it — we need a workaround by noon.</div>"
+        },
+        "attachments": [],
+        "reactions": []
+      },
+      {
+        "id": "CH_MSG_001_R3",
+        "replyToId": "CH_MSG_001",
+        "createdDateTime": "2026-01-09T09:05:00Z",
+        "from": {
+          "user": { "id": "T-USER-301", "displayName": "Nina Patel (Support)" }
+        },
+        "body": {
+          "contentType": "html",
+          "content": "<div>Confirmed — v2.4 resolves known clock drift. As a failsafe, set OBS Audio Sync Offset to 250ms. We'll push a hotfix later today. Marking this as <b>Urgent</b> on our queue.</div>"
+        },
+        "attachments": [],
+        "reactions": []
+      }
+    ]
+  },
+  {
+    "id": "CH_MSG_002",
+    "createdDateTime": "2026-01-09T10:00:00Z",
+    "from": {
+      "user": { "id": "T-USER-150", "displayName": "Emily Carter" }
+    },
+    "body": {
+      "contentType": "html",
+      "content": "<div>Quarterly Strategic Review (Q1): Aligning on <b>business goals</b> for online ministry. Discussion topics: <br/>• <b>ROI</b> from livestream upgrades<br/>• <b>Outcomes</b> (attendance, engagement, prayer requests)<br/>• <b>Budgeting</b> for camera refresh<br/>• <b>Next steps</b> to scale small groups online</div>"
+    },
+    "importance": "high",
+    "reactions": [],
+    "attachments": [
+      {
+        "id": "FILE_CH_003",
+        "name": "Q1_Ministry_Outcomes_Review.pdf",
+        "contentType": "reference",
+        "contentUrl": "https://sharepoint.com/sites/churchops/Q1_Ministry_Outcomes_Review.pdf"
+      }
+    ],
+    "replies": [
+      {
+        "id": "CH_MSG_002_R1",
+        "replyToId": "CH_MSG_002",
+        "createdDateTime": "2026-01-09T10:18:15Z",
+        "from": {
+          "user": { "id": "T-USER-160", "displayName": "David Lee" }
+        },
+        "body": {
+          "contentType": "html",
+          "content": "<div>Finance perspective: The projected <b>ROI</b> on the new cameras is 14–18% within 12 months if we sustain current viewership growth. <b>Budgeting</b> can accommodate two units this quarter.</div>"
+        },
+        "attachments": [],
+        "reactions": []
+      },
+      {
+        "id": "CH_MSG_002_R2",
+        "replyToId": "CH_MSG_002",
+        "createdDateTime": "2026-01-09T10:32:40Z",
+        "from": {
+          "user": { "id": "T-USER-120", "displayName": "Mark Johnson" }
+        },
+        "body": {
+          "contentType": "html",
+          "content": "<div>Proposed <b>next steps</b>: 1) Pilot camera A in the chapel next week, 2) Measure outcome metrics (drop-off, AV sync, prayer submissions), 3) Decide by Feb 1. Expected <b>outcome</b>: 20%% reduction in post-production time.</div>"
+        },
+        "attachments": [],
+        "reactions": [
+          { "reactionType": "like", "user": { "id": "T-USER-150", "displayName": "Emily Carter" } }
+        ]
+      }
+    ]
+  },
+  {
+    "id": "CH_MSG_003",
+    "createdDateTime": "2026-01-09T12:30:00Z",
+    "from": {
+      "user": { "id": "T-USER-175", "displayName": "Ava Brown" }
+    },
+    "body": {
+      "contentType": "html",
+      "content": "<div>Quick question for planning: How do you compare to Planning Center Live for service flow? Does ChurchSuite have real-time lyrics sync? Also, where do we check our <b>contract renewal terms</b>?</div>"
+    },
+    "importance": "normal",
+    "reactions": [],
+    "attachments": [],
+    "replies": [
+      {
+        "id": "CH_MSG_003_R1",
+        "replyToId": "CH_MSG_003",
+        "createdDateTime": "2026-01-09T12:44:20Z",
+        "from": {
+          "user": { "id": "T-USER-44", "displayName": "Dave Miller" }
+        },
+        "body": {
+          "contentType": "html",
+          "content": "<div>Great questions. Compared to <b>Planning Center Live</b>, we support scene presets and MIDI triggers; lyrics sync is in beta (ChurchSuite offers basic sync, not MIDI). Your <b>contract renewal terms</b> are net-30 with a 10%% early renewal discount. I can send the doc.</div>"
+        },
+        "attachments": [
+          {
+            "id": "FILE_CH_004",
+            "name": "Renewal_Terms_2026.pdf",
+            "contentType": "reference",
+            "contentUrl": "https://sharepoint.com/sites/churchops/Renewal_Terms_2026.pdf"
+          }
+        ],
+        "reactions": []
+      }
+    ]
+  },
+  {
+    "id": "CH_MSG_004",
+    "createdDateTime": "2026-01-09T15:45:00Z",
+    "from": {
+      "user": { "id": "T-USER-210", "displayName": "Maria Gomez" }
+    },
+    "body": {
+      "contentType": "html",
+      "content": "<div>Feature request for outreach: Can we also schedule volunteer reminders via SMS? Is it possible to add <b>integration with</b> Mailchimp and Planning Center Groups so new visitor follow-ups are automatic?</div>"
+    },
+    "importance": "normal",
+    "reactions": [],
+    "attachments": [
+      {
+        "id": "FILE_CH_005",
+        "name": "Visitor_Followup_Sample.csv",
+        "contentType": "reference",
+        "contentUrl": "https://sharepoint.com/sites/outreach/Visitor_Followup_Sample.csv"
+      }
+    ],
+    "replies": [
+      {
+        "id": "CH_MSG_004_R1",
+        "replyToId": "CH_MSG_004",
+        "createdDateTime": "2026-01-09T16:02:10Z",
+        "from": {
+          "user": { "id": "T-USER-120", "displayName": "Mark Johnson" }
+        },
+        "body": {
+          "contentType": "html",
+          "content": "<div>Yes — SMS reminders are on our roadmap. <b>Integration with</b> Mailchimp can be done via webhook today; Planning Center Groups integration would need an API key from Ops.</div>"
+        },
+        "attachments": [],
+        "reactions": []
+      },
+      {
+        "id": "CH_MSG_004_R2",
+        "replyToId": "CH_MSG_004",
+        "createdDateTime": "2026-01-09T16:20:35Z",
+        "from": {
+          "user": { "id": "T-USER-77", "displayName": "Elena Rodriguez" }
+        },
+        "body": {
+          "contentType": "html",
+          "content": "<div>We can prototype this next sprint. If approved, GA by March 15. Please share any consent requirements for SMS.</div>"
+        },
+        "attachments": [],
+        "reactions": [
+          { "reactionType": "like", "user": { "id": "T-USER-210", "displayName": "Maria Gomez" } }
+        ]
+      }
+    ]
+  }
+]

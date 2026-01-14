@@ -1,0 +1,10 @@
+2026-01-08 15:49:37,585 - INFO - Starting Teams to Slack migration...
+2026-01-08 15:49:37,586 - INFO - Processing 1 parent messages from data/teams_convo.json
+2026-01-08 15:49:37,652 - INFO - Total exported: 2 messages
+2026-01-08 15:49:43,772 - INFO - Starting Teams to Slack migration...
+2026-01-08 15:49:43,773 - INFO - Processing 1 parent messages from data/teams_convo.json
+2026-01-08 15:49:43,780 - INFO - Total exported: 2 messages
+2026-01-08 15:49:52,773 - INFO - Starting Teams to Slack migration...
+2026-01-08 15:49:52,773 - INFO - Processing 1 parent messages from data/teams_convo.json
+2026-01-08 15:49:52,775 - INFO - [OK] Exported 2 messages to slack_export\2026-01-08.json
+2026-01-08 15:49:52,775 - INFO - Total exported: 2 messages

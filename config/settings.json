@@ -1,0 +1,35 @@
+{
+  "migration": {
+    "input_file": "data/input/teams_convo.json",
+    "output_dir": "data/output",
+    "log_file": "logs/migration.log",
+    "dry_run": true,
+    "batch_size": 1000,
+    "max_message_length": 4000
+  },
+  "slack": {
+    "team_id": "T001BRYD",
+    "channel_name": "migrated-teams",
+    "bot_token_env": "SLACK_BOT_TOKEN",
+    "upload_enabled": false,
+    "api_rate_limit_per_second": 50
+  },
+  "notifications": {
+    "enabled": false,
+    "webhook_url_env": "SLACK_WEBHOOK_URL",
+    "notification_channel": "#migration-alerts",
+    "alert_thresholds": {
+      "error_rate": 0.05,
+      "duplicate_rate": 0.30,
+      "processing_time_minutes": 60,
+      "critical_error_count": 10
+    }
+  },
+  "features": {
+    "deduplication": true,
+    "attachment_processing": true,
+    "error_recovery": true,
+    "detailed_logging": true,
+    "compression_enabled": false
+  }
+}

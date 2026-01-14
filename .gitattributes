@@ -1,0 +1,28 @@
+# Auto detect text files and perform LF normalization
+* text=auto
+
+# Documents
+*.md text
+*.txt text
+*.json text
+
+# Scripts
+*.py text
+*.sh text eol=lf
+*.bat text eol=crlf
+
+# Configuration
+*.yaml text
+*.yml text
+*.toml text
+*.ini text
+
+# Git files
+.gitattributes text
+.gitignore text
+
+# Exclude files from export
+.gitattributes export-ignore
+.gitignore export-ignore
+.github export-ignore
+tests/ export-ignore
