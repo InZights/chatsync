@@ -1,6 +1,6 @@
 <div align="center">
 
-# 💬 ChatSync
+# ChatSync
 
 ### **Enterprise Conversation Data Platform**
 
